@@ -1,0 +1,7 @@
+{
+  "name": "BebopChat Frontend",
+  "dockerComposeFile": "compose.yaml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [5173]
+}
