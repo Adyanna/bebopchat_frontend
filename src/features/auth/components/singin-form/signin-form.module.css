@@ -1,0 +1,105 @@
+.loginContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+
+    padding: 20px;
+}
+
+.loginForm {
+    width: 100%;
+    max-width: 420px;
+
+    background: #ffffff;
+    border-radius: 12px;
+
+    padding: 32px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 10px;
+
+    color: #1e293b;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.input {
+    /* width: 100%; */
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.button {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.button:hover {
+    background: #1d4ed8;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.error {
+    color: #dc2626;
+    font-size: 14px;
+    text-align: center;
+}
+
+.countryCode {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.countryCode:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+@media (max-width: 480px) {
+    .loginForm {
+        padding: 24px;
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+}
