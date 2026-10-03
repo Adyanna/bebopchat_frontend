@@ -12,7 +12,7 @@ const PublicMenuOptions: Menu_Options[] = [
 
 const PrivateMenuOptions: Menu_Options[] = [
   { label: "Perfil", path: "/profile" },
-  { label: "Mensajes", path: "/message" },
+  { label: "Mensajestest", path: "/chats" },
   { label: "Estados", path: "/status" },
   { label: "Llamadas", path: "/calls" },
   { label: "Juegos", path: "/games" }
@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     // Si NO está autenticado e intenta acceder a la raíz o a una ruta privada
     if (!isautenticate) {
-      const privatePaths = ['/profile', '/message', '/status', '/calls', '/games'];
+      const privatePaths = ['/profile', '/chats', '/status', '/calls', '/games'];
       if (location.pathname === '/' || privatePaths.includes(location.pathname)) {
         navigate('/home', { replace: true });
       }
