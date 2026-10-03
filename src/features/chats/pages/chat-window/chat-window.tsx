@@ -3,10 +3,9 @@
 function ChatWindow() {
     return (
         <div>
-            <p>Chat window</p>
-            <ul>
-                <li></li>
-            </ul>
+            {/*<ContactInfo />*/}
+            {/*<Messages />*/}
+            {/*<ChatInput />*/}
         </div>
     )
 }

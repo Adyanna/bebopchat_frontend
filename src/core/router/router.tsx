@@ -1,6 +1,6 @@
-import ChatLayout from '@features/chats/components/chat-layout';
-import ChatEmpty from '@features/chats/pages/chat-empty';
-import ChatWindow from '@features/chats/pages/chat-window';
+import ChatPage from '@features/chats/pages/chat-page/chat-page';
+import ChatEmpty from '@features/chats/pages/chat-empty/chat-empty';
+import ChatWindow from '@features/chats/pages/chat-window/chat-window';
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import { redirect } from 'react-router';
@@ -36,7 +36,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'chats',
-        element: <ChatLayout />,
+        element: <ChatPage />,
         children: [
           {
             index: true,

@@ -1,12 +1,12 @@
 import { Outlet } from "react-router";
 
-function ChatLayout() {
+function ChatPage() {
     return (
-        <div className="chat-layout">
+        <div className="chat-Page">
             {/*<ChatList />*/}
             <Outlet />
         </div>
     );
 }
 
-export default ChatLayout;
+export default ChatPage;
