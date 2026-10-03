@@ -7,8 +7,10 @@ import { redirect } from 'react-router';
 
 // const HomePage = React.lazy(() => import('@features/home/home-page'));
 const App = React.lazy(() => import('@core/components/app/App'));
-const HomePage = React.lazy(() => import('@features/home/pages/home-page'));
-// const ProductDetailPage = React.lazy(() => import('@features/products/pages/products-detail'));
+const HomePage = React.lazy(() => import('@features/home/pages/home-page/home-page'));
+const ServicesPage = React.lazy(() => import('@features/home/pages/services-page/services-page'));
+const AboutPage = React.lazy(() => import('@features/home/pages/about-page/about-page'));
+const ProfilePage = React.lazy(() => import('@features/profile/pages/profile-page'));
 // const ProductNew = React.lazy(() => import('@features/products/pages/products-new'));
 
 const SignupPage = React.lazy(
@@ -30,10 +32,18 @@ export const Router = createBrowserRouter([
         path: 'home',
         element: <HomePage />,
       },
-      // {
-      //   path: 'products',
-      //   element: <ProductsPage />,
-      // },
+      {
+        path: 'services',
+        element: <ServicesPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
+      },
       // {
       //   path: 'products/:id',
       //   element: <ProductDetailPage />,

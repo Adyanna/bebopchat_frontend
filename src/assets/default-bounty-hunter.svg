@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Fondo Negro Espacial -->
+  <rect width="200" height="200" fill="#0B0C10" />
+
+  <!-- Fondo de pantalla retro con rejilla -->
+  <rect x="10" y="10" width="180" height="180" rx="8" fill="#1F2833" stroke="#66FCF1" stroke-width="2" stroke-opacity="0.4" />
+
+  <!-- Texto de cabecera estilo Terminal ISSP -->
+  <text x="20" y="30" fill="#66FCF1" font-family="monospace" font-size="10" letter-spacing="1">UNKNOWN HUNTER</text>
+  <text x="145" y="30" fill="#FFB400" font-family="monospace" font-size="10">NO DATA</text>
+
+  <!-- Línea divisoria de interfaz -->
+  <line x1="20" y1="36" x2="180" y2="36" stroke="#66FCF1" stroke-width="1" stroke-opacity="0.3" />
+
+  <!-- Silueta Anónima estilo Cowboy Bebop / Cyber Noir -->
+  <g fill="#0B0C10" stroke="#66FCF1" stroke-width="1.5">
+    <!-- Cabeza y Cabello alborotado estilo Spike -->
+    <path d="M100,60 C85,60 78,72 78,85 C78,92 82,98 87,102 C85,108 83,115 80,122 C90,125 100,125 100,125 C100,125 110,125 120,122 C117,115 115,108 113,102 C118,98 122,92 122,85 C122,72 115,60 100,60 Z" />
+    <!-- Sombras / Detalles de silueta de abrigo / hombros -->
+    <path d="M50,180 C50,145 70,132 100,132 C130,132 150,145 150,180 Z" />
+  </g>
+
+  <!-- Mira telescópica / Target reticle superpuesto en el rostro -->
+  <circle cx="100" cy="90" r="28" stroke="#FFB400" stroke-width="1" fill="none" stroke-dasharray="4,2" opacity="0.8" />
+  <line x1="100" y1="58" x2="100" y2="122" stroke="#FFB400" stroke-width="1" opacity="0.4" />
+  <line x1="68" y1="90" x2="132" y2="90" stroke="#FFB400" stroke-width="1" opacity="0.4" />
+
+  <!-- Badge inferior "TARGET SEARCH" -->
+  <rect x="55" y="162" width="90" height="16" rx="3" fill="#0B0C10" stroke="#66FCF1" stroke-width="1" />
+  <text x="100" y="173" fill="#66FCF1" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">SEARCHING...</text>
+</svg>
