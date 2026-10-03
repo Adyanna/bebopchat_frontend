@@ -1,0 +1,140 @@
+.aboutContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    color: #C5C6C7;
+    font-family: 'Courier New', Courier, monospace, system-ui;
+}
+
+.header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    color: #66FCF1;
+    background-color: rgba(102, 252, 241, 0.08);
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(102, 252, 241, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.title {
+    font-size: 2.25rem;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #C5C6C7;
+    max-width: 600px;
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.block {
+    background-color: #1F2833;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #66FCF1;
+}
+
+.block h2 {
+    color: #66FCF1;
+    font-size: 1.35rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.block p {
+    color: #C5C6C7;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.statCard {
+    background-color: #1F2833;
+    border: 1px solid rgba(102, 252, 241, 0.15);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.statNumber {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFB400;
+}
+
+.statLabel {
+    font-size: 0.8rem;
+    color: #C5C6C7;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+.aboutCta {
+    text-align: center;
+    background-color: #1F2833;
+    border: 1px dashed rgba(102, 252, 241, 0.3);
+    border-radius: 0.5rem;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.aboutCta h2 {
+    color: #FFFFFF;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.aboutCta p {
+    color: #C5C6C7;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.btnPrimary {
+    background-color: #66FCF1;
+    color: #0B0C10;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
+}
+
+.btnPrimary:hover {
+    background-color: #45A29E;
+    box-shadow: 0 0 16px rgba(102, 252, 241, 0.45);
+}
