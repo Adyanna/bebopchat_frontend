@@ -1,0 +1,84 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.leftMenu,
+.rightMenu {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+}
+
+/* Enlaces principales del menú */
+.navLink {
+    color: #C5C6C7;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+}
+
+.navLink:hover {
+    color: #66FCF1;
+    background-color: rgba(102, 252, 241, 0.08);
+}
+
+.activeLink {
+    color: #66FCF1;
+    border-bottom: 2px solid #66FCF1;
+}
+
+/* Botón de Login */
+.loginBtn {
+    color: #66FCF1;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgba(102, 252, 241, 0.4);
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+    background-color: rgba(102, 252, 241, 0.15);
+    box-shadow: 0 0 8px rgba(102, 252, 241, 0.3);
+}
+
+/* Botón de Registro */
+.signupBtn {
+    color: #0B0C10;
+    background-color: #66FCF1;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.signupBtn:hover {
+    background-color: #45A29E;
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+}
