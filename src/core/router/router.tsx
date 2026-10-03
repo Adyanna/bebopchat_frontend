@@ -1,6 +1,10 @@
+import ChatLayout from '@features/chats/components/chat-layout';
+import ChatEmpty from '@features/chats/pages/chat-empty';
+import ChatWindow from '@features/chats/pages/chat-window';
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import { redirect } from 'react-router';
+
 
 // import { ProtectedRoute } from '@core/guards/protected-route';
 // import { NotFoundPage } from '@core/components/not-found/not-found';
@@ -30,10 +34,21 @@ export const Router = createBrowserRouter([
         path: 'home',
         element: <HomePage />,
       },
-      // {
-      //   path: 'products',
-      //   element: <ProductsPage />,
-      // },
+      {
+        path: 'chats',
+        element: <ChatLayout />,
+        children: [
+          {
+            index: true,
+            element: <ChatEmpty />,
+          },
+          {
+            path: ':id',
+            element: <ChatWindow />,
+          },
+        ],
+      },
+
       // {
       //   path: 'products/:id',
       //   element: <ProductDetailPage />,
