@@ -1,0 +1,192 @@
+/* Contenedor principal de la cabecera */
+.headerContainer {
+    position: relative;
+    width: 100%;
+    background-color: #1F2833;
+    border-bottom: 2px solid rgba(102, 252, 241, 0.4);
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(102, 252, 241, 0.05);
+}
+
+/* Indicador superior estilo Terminal ISSP */
+.terminalBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.statusIndicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pulseDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #66FCF1;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Layout del perfil */
+.profileContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .profileContent {
+        flex-direction: row;
+    }
+}
+
+/* Contenedor de la Foto de Perfil */
+.avatarWrapper {
+    position: relative;
+}
+
+.avatarFrame {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    border: 2px solid #66FCF1;
+    box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+    background-color: #0B0C10;
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.avatarWrapper:hover .avatarImage {
+    transform: scale(1.05);
+}
+
+/* Badge decorativo */
+.badge {
+    position: absolute;
+    bottom: -0.5rem;
+    right: -0.5rem;
+    background-color: #FFB400;
+    color: #0B0C10;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: monospace;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Información del Usuario */
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.25rem;
+}
+
+@media (min-width: 640px) {
+    .userInfo {
+        text-align: left;
+    }
+}
+
+.userLabel {
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.userName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #C5C6C7;
+    letter-spacing: 0.025em;
+    margin: 0;
+}
+
+.phoneDetail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 0.25rem;
+    font-size: 0.875rem;
+    color: rgba(197, 198, 199, 0.7);
+    font-family: monospace;
+}
+
+@media (min-width: 640px) {
+    .phoneDetail {
+        justify-content: flex-start;
+    }
+}
+
+.freqLabel {
+    color: #FFB400;
+}
+
+/* Animación */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Contenedor fijo al tamaño de la pantalla */
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* Ocupa exactamente el alto de la pantalla */
+    background-color: #0B0C10;
+    color: #C5C6C7;
+    overflow: hidden;
+    /* Evita el scroll general de la ventana */
+}
+
+/* El área central absorbe el espacio restante y maneja scroll interno si es necesario */
+.mainContent {
+    flex: 1;
+    max-width: 56rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
+    /* Solo el formulario/contenido hace scroll si no cabe */
+    box-sizing: border-box;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0B0C10;
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+}

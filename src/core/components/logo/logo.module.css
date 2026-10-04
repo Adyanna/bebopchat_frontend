@@ -1,0 +1,12 @@
+.logoElement {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 0.25rem;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.logoElement:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(102, 252, 241, 0.6));
+}

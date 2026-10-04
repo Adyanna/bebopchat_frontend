@@ -1,0 +1,70 @@
+/* Contenedor principal del Footer */
+.footerContainer {
+    width: 100%;
+    background-color: #0B0C10;
+    border-top: 1px solid rgba(102, 252, 241, 0.2);
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+}
+
+.footerContent {
+    max-width: 56rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .footerContent {
+        flex-direction: row;
+    }
+}
+
+/* Lado izquierdo: Marca / Sistema */
+.brandSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+@media (min-width: 640px) {
+    .brandSection {
+        align-items: flex-start;
+    }
+}
+
+.systemTitle {
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.875rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.copyright {
+    color: rgba(197, 198, 199, 0.5);
+    font-size: 0.75rem;
+}
+
+/* Lado derecho: Créditos de desarrollo */
+.creditsSection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #C5C6C7;
+}
+
+.devBadge {
+    color: #FFB400;
+    border: 1px solid #FFB400;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}

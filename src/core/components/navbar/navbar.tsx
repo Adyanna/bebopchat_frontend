@@ -1,43 +1,43 @@
 import type { Menu_Options } from '@core/types/core-types';
-import './navbar.css';
 import { Link, NavLink } from "react-router";
+import style from './navbar.module.css';
 
 type Props = {
     readonly menuOptions: Menu_Options[];
-    readonly isAuthenticated?: boolean | null; // Agrega esta prop para controlar la autenticación
-    onLogOut: () => void;
-}
+};
 
-export const Navbar: React.FC<Props> = ({ menuOptions, isAuthenticated, onLogOut }) => {
-
+export const Navbar: React.FC<Props> = ({ menuOptions }) => {
     return (
-        <nav>
-            <ul className="menu">
-                <div className="leftMenu">
-                    {
-                        menuOptions.map((option, index) => (
-                            <li key={index}>
-                                <NavLink to={option.path}>{option.label}</NavLink>
-                            </li>
-                        ))
-                    }
+        <nav className={style.navbar}>
+            <ul className={style.menu}>
+                <div className={style.leftMenu}>
+                    {menuOptions.map((option, index) => (
+                        <li key={index} className={style.menuItem}>
+                            <NavLink
+                                to={option.path}
+                                className={({ isActive }) =>
+                                    `${style.navLink} ${isActive ? style.activeLink : ''}`
+                                }
+                            >
+                                {option.label}
+                            </NavLink>
+                        </li>
+                    ))}
                 </div>
 
-                <div className="rightMenu">
-                    {!isAuthenticated ? (
-                        <>
-                            <li>
-                                <Link to="/login">Login</Link>
-                            </li>
-                            <li><Link to="/signup">Registrarse</Link></li>
-                        </>
-                    ) : (
-                        <>
-                            <button type="button" onClick={onLogOut} className="menuButton" >Logout </button>
-                        </>
-                    )}
+                <div className={style.rightMenu}>
+                    <li className={style.menuItem}>
+                        <Link to="/login" className={style.loginBtn}>
+                            Ingresar
+                        </Link>
+                    </li>
+                    <li className={style.menuItem}>
+                        <Link to="/signup" className={style.signupBtn}>
+                            Registrarse
+                        </Link>
+                    </li>
                 </div>
             </ul>
         </nav>
     );
-}
+};

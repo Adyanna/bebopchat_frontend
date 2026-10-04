@@ -1,0 +1,120 @@
+.formCard {
+    background-color: #1F2833;
+    border: 1px solid rgba(102, 252, 241, 0.25);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.cardHeader {
+    border-bottom: 1px dashed rgba(102, 252, 241, 0.3);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Estilos para inputs, selects y textareas */
+.input,
+.select,
+.textarea {
+    width: 100%;
+    background-color: #0B0C10;
+    border: 1px solid rgba(102, 252, 241, 0.3);
+    border-radius: 0.25rem;
+    padding: 0.625rem;
+    color: #C5C6C7;
+    font-family: monospace, sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Opciones desplegables */
+.select option {
+    background-color: #0B0C10;
+    color: #66FCF1;
+    padding: 0.5rem;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: #66FCF1;
+    box-shadow: 0 0 8px rgba(102, 252, 241, 0.4);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(197, 198, 199, 0.1);
+}
+
+.submitBtn {
+    background-color: #FFB400;
+    color: #0B0C10;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background-color: #e09e00;
+    transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
