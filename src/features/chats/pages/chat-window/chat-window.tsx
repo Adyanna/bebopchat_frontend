@@ -18,7 +18,7 @@ function ChatWindow() {
 
 
     return (
-        <div>
+        <div className="flex h-135 min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
             {<ChatInfo type={chat.type} participants={chat.participants} name={chat.name} />}
             {<Messages chatId={chatId} />}
             {/*<ChatInput />*/}
