@@ -4,16 +4,16 @@ import ChatWindow from '@features/chats/pages/chat-window/chat-window';
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import { redirect } from 'react-router';
+import App from '@core/components/app/App';
 
 
 // import { ProtectedRoute } from '@core/guards/protected-route';
 // import { NotFoundPage } from '@core/components/not-found/not-found';
-
-// const HomePage = React.lazy(() => import('@features/home/home-page'));
-const App = React.lazy(() => import('@core/components/app/App'));
-const HomePage = React.lazy(() => import('@features/home/pages/home-page'));
-// const ProductDetailPage = React.lazy(() => import('@features/products/pages/products-detail'));
-// const ProductNew = React.lazy(() => import('@features/products/pages/products-new'));
+//const App = React.lazy(() => import('@core/components/app/App'));
+const HomePage = React.lazy(() => import('@features/home/pages/home-page/home-page'));
+const ServicesPage = React.lazy(() => import('@features/home/pages/services-page/services-page'));
+const AboutPage = React.lazy(() => import('@features/home/pages/about-page/about-page'));
+const ProfilePage = React.lazy(() => import('@features/profile/pages/profile-page'));
 
 const SignupPage = React.lazy(
   () => import('@features/auth/pages/signup/signup-page')
@@ -33,6 +33,18 @@ export const Router = createBrowserRouter([
       {
         path: 'home',
         element: <HomePage />,
+      },
+      {
+        path: 'services',
+        element: <ServicesPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
       },
       {
         path: 'chats',

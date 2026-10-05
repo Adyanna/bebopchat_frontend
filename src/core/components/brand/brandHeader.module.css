@@ -1,0 +1,28 @@
+.brandSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+.title {
+    font-family: 'Courier New', Courier, monospace, system-ui;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #66FCF1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 6px rgba(102, 252, 241, 0.25);
+}
+
+.subTitle {
+    font-family: 'Courier New', Courier, monospace, system-ui;
+    font-size: 0.75rem;
+    color: #C5C6C7;
+    letter-spacing: 0.05em;
+    margin: 0;
+    padding: 0;
+    opacity: 0.85;
+}

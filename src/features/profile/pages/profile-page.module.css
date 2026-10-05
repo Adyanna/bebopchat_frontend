@@ -1,0 +1,32 @@
+/* Contenedor principal de la página */
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #0B0C10;
+    color: #C5C6C7;
+}
+
+/* Indicador de carga */
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0B0C10;
+    color: #66FCF1;
+    font-family: monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+}
+
+/* Área principal para el formulario */
+.mainContent {
+    flex: 1;
+    max-width: 56rem;
+    /* max-w-4xl */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
