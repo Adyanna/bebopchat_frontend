@@ -15,6 +15,7 @@ export function MessageBuble({ senderId, content }: Props) {
     return (
         <div className={clasStyle}>
             <div className="break-words">{content}</div>
+            {/*Mejorar fecha traida del backend*/}
             <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">4:08 p.m.</div>
         </div>
     )

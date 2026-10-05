@@ -36,10 +36,15 @@ export function useMessages(chatId: number) {
         setIsFetchingMore(false);
     }
 
+    const addMessage = (message: Message) => {
+        setMessages(prev => [...prev, message]);
+    };
+
     return {
         messages,
         fetchMore,
         isFetchingMore,
-        hasMore
+        hasMore,
+        addMessage
     }
 }

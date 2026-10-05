@@ -1,14 +1,17 @@
 import { useRef, useEffect } from "react";
-import { useMessages } from "@features/chats/hooks/useMessages";
 import { MessageBuble } from "../message-bubble/message-bubble";
+import type { Message } from "@features/chats/types/chat-types";
+import "./message.css"
 
 
 type Props = {
-    chatId: number
+    messages: Message[];
+    fetchMore: () => void;
+    isFetchingMore: boolean;
+    hasMore: boolean;
 }
 
-export const Messages = ({ chatId }: Props) => {
-    const { messages, isFetchingMore, fetchMore, hasMore } = useMessages(chatId);
+export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore }: Props) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
@@ -33,7 +36,7 @@ export const Messages = ({ chatId }: Props) => {
     }
 
     return (
-        <div ref={containerRef} onScroll={handleScroll} className="flex-1 overflow-y-auto flex flex-col gap-2 !px-4">
+        <div ref={containerRef} onScroll={handleScroll} className="messages-container flex-1 overflow-y-auto flex flex-col gap-2 !px-4">
             {isFetchingMore &&
                 <span className="text-center p-2">Cargando...</span>}
             {messages.map((message) => (
