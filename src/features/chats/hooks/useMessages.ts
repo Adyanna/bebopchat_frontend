@@ -1,5 +1,5 @@
 import { getMessages } from "../services/chat.service";
-import type { Message } from "../types/chat-types";
+import type { Message } from "../entities/chat.entity";
 import { useEffect, useState } from "react";
 
 

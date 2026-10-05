@@ -1,4 +1,4 @@
-import type { Chat, MessageResponse, Message } from "@features/chats/types/chat-types";
+import type { Chat, MessageResponse, Message } from "@features/chats/entities/chat.entity";
 
 const url = `http://${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}/chats`;
 

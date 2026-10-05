@@ -1,4 +1,5 @@
-import type { ChatParticipant, ChatType } from "@features/chats/types/chat-types";
+import type { ChatParticipant, ChatType } from "@features/chats/entities/chat.entity";
+import { useUser } from "@features/users/hooks/useUser";
 import "./chat-info.css"
 
 
@@ -10,7 +11,9 @@ type Props = {
 
 
 export const ChatInfo = ({ type, participants, name }: Props) => {
-    const currentUserId = 1
+    const { userData } = useUser();
+    console.log("USER CONTEXT:", userData);
+    const currentUserId = userData?.id;
     const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
 
     const otherParticipant = participants.find(

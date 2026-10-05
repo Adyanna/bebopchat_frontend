@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getChat } from "../services/chat.service";
-import { type Chat } from "../types/chat-types";
+import { type Chat } from "../entities/chat.entity";
 
 export const useChat = (chatId: number) => {
     const [chat, setChat] = useState<Chat | null>(null);
@@ -8,9 +8,7 @@ export const useChat = (chatId: number) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("useChat recibió:", chatId);
         const loadChat = async (): Promise<void> => {
-            console.log("Voy a llamar getChat con:", chatId);
             try {
                 const chat = await getChat(chatId);
                 setChat(chat);

@@ -6,12 +6,15 @@ import { Messages } from "@features/chats/components/messages/messages";
 import { ChatInput } from "@features/chats/components/chatInput/chat-input";
 import { createMessage } from "@features/chats/services/chat.service";
 import { useMessages } from "@features/chats/hooks/useMessages";
+import { useState } from "react";
+
 
 function ChatWindow() {
     const { id } = useParams();
     const chatId = Number(id);
     const { chat, notification, loading, } = useChat(chatId);
     const { messages, isFetchingMore, fetchMore, hasMore, addMessage } = useMessages(chatId);
+    const [error, setError] = useState<string | null>(null);
 
     if (loading) return <p>Cargando...</p>;
     if (notification) return <p>{notification}</p>;
@@ -25,8 +28,10 @@ function ChatWindow() {
             const response = await createMessage(chatId, content);
 
             addMessage(response);
+            setError(null);
         } catch (error) {
-            console.error("Error al enviar mensaje:", error);
+            const errorMessage = error instanceof Error ? error.message : "Error al mandar el mensaje"
+            setError(errorMessage)
         }
     };
 
@@ -35,7 +40,7 @@ function ChatWindow() {
         <div className="flex h-135 min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
             {<ChatInfo type={chat.type} participants={chat.participants} name={chat.name} />}
             {<Messages messages={messages} isFetchingMore={isFetchingMore}
-                fetchMore={fetchMore} hasMore={hasMore} />}
+                fetchMore={fetchMore} hasMore={hasMore} messageError={error} />}
             {<ChatInput onSend={sendMessage} />}
         </div>
     )
