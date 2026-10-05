@@ -17,13 +17,13 @@ export async function signinUser(phone: string, password: string) {
         const data = await response.json();
 
         if (!response.ok) {
-               throw new Error(
+            throw new Error(
                 data.errors?.join('\n') ||
                 data.message ||
                 'Error al iniciar sesión'
             );
         }
-        
+
 
         return data.token;
 
@@ -84,7 +84,7 @@ export async function registerUser(user: userCreateDTO): Promise<userViewDTO> {
         console.log(data);
 
         if (!data.ok) {
-           const error = await data.json();
+            const error = await data.json();
 
             throw new Error(
                 error.errors?.join('\n') || "Error en la creación del usuario"
