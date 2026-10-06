@@ -10,9 +10,10 @@ type Props = {
     isFetchingMore: boolean;
     hasMore: boolean;
     messageError: string | null;
+    removeMessage: (messageId: number) => void;
 }
 
-export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore, messageError }: Props) => {
+export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore, messageError, removeMessage }: Props) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
@@ -42,7 +43,11 @@ export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore, message
                 <span className="text-center p-2">Cargando...</span>}
             {messages.map((message) => (
                 <MessageBuble
-                    key={message.id} senderId={message.senderId} content={message.content}
+                    id={message.id}
+                    key={message.id}
+                    senderId={message.senderId}
+                    content={message.content}
+                    onDelete={removeMessage}
                 />))}
             {messageError && <div className="message-error">
                 <svg

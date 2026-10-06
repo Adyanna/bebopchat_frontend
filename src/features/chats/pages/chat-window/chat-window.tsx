@@ -13,7 +13,7 @@ function ChatWindow() {
     const { id } = useParams();
     const chatId = Number(id);
     const { chat, notification, loading, } = useChat(chatId);
-    const { messages, isFetchingMore, fetchMore, hasMore, addMessage } = useMessages(chatId);
+    const { messages, isFetchingMore, fetchMore, hasMore, addMessage, removeMessage } = useMessages(chatId);
     const [error, setError] = useState<string | null>(null);
 
     if (loading) return <p>Cargando...</p>;
@@ -40,7 +40,8 @@ function ChatWindow() {
         <div className="flex h-135 min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
             {<ChatInfo type={chat.type} participants={chat.participants} name={chat.name} />}
             {<Messages messages={messages} isFetchingMore={isFetchingMore}
-                fetchMore={fetchMore} hasMore={hasMore} messageError={error} />}
+                fetchMore={fetchMore} hasMore={hasMore} messageError={error}
+                removeMessage={removeMessage} />}
             {<ChatInput onSend={sendMessage} />}
         </div>
     )

@@ -88,3 +88,32 @@ export async function createMessage(chatId: number, content: string): Promise<Me
 
     return data;
 }
+
+export async function deleteMessage(
+    chatId: number,
+    messageId: number
+): Promise<void> {
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/messages/${messageId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    if (!response.ok) {
+        const data = await response.json();
+
+        throw new Error(
+            data.errors?.join("\n") ||
+            data.message ||
+            "Error al eliminar el mensaje"
+        );
+    }
+}

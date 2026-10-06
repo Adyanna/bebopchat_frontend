@@ -1,6 +1,6 @@
-import { getMessages } from "../services/chat.service";
 import type { Message } from "../entities/chat.entity";
 import { useEffect, useState } from "react";
+import { getMessages, deleteMessage as deleteMessageService } from "../services/chat.service";
 
 
 export function useMessages(chatId: number) {
@@ -40,11 +40,20 @@ export function useMessages(chatId: number) {
         setMessages(prev => [...prev, message]);
     };
 
+    const removeMessage = async (messageId: number) => {
+        await deleteMessageService(chatId, messageId);
+
+        setMessages(prev =>
+            prev.filter(message => message.id !== messageId)
+        );
+    };
+
     return {
         messages,
         fetchMore,
         isFetchingMore,
         hasMore,
-        addMessage
+        addMessage,
+        removeMessage
     }
 }
