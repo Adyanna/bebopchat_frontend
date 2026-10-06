@@ -1,0 +1,39 @@
+.footerContainer {
+    display: flex;
+    justify-content: flex-end;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+    pointer-events: none;
+    padding: 1rem;
+}
+
+.floatingButton {
+    pointer-events: auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: #0b0c10;
+    color: #66fcf1;
+    border: 2px solid #66fcf1;
+    font-size: 1.75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 10px rgba(102, 252, 241, 0.3);
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+.floatingButton:hover {
+    background-color: #66fcf1;
+    color: #0b0c10;
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 18px rgba(102, 252, 241, 0.6);
+}
+
+.floatingButton:active {
+    transform: scale(0.95);
+}

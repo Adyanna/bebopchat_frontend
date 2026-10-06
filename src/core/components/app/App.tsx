@@ -12,7 +12,8 @@ const PublicMenuOptions: Menu_Options[] = [
 
 const PrivateMenuOptions: Menu_Options[] = [
   { label: "Perfil", path: "/profile" },
-  { label: "Mensajestest", path: "/chats" },
+  { label: "Contactos", path: "/contacts" },
+  { label: "Mensajes", path: "/chats" },
   { label: "Estados", path: "/status" },
   { label: "Llamadas", path: "/calls" },
   { label: "Juegos", path: "/games" }

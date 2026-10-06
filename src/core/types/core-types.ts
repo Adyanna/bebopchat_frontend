@@ -10,3 +10,5 @@ export type NotificactionData = {
     message: string;
     type: NotiType;
 }
+
+export type FileType = 'photos' | 'multimedia' | 'audio';

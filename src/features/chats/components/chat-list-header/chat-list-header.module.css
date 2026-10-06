@@ -1,0 +1,29 @@
+.headerContainer {
+    padding: 1rem;
+    border-bottom: 1px solid #1f2833;
+    background-color: #0d0e12;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    background-color: #0b0c10;
+    border: 1px solid #1f2833;
+    color: #c5c6c7;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput::placeholder {
+    color: #45a29e;
+    opacity: 0.6;
+}
+
+.searchInput:focus {
+    border-color: #66fcf1;
+    box-shadow: 0 0 8px rgba(102, 252, 241, 0.2);
+}
