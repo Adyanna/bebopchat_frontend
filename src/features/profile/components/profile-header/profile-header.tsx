@@ -1,9 +1,11 @@
 import type { ProfileHeaderProps } from "@features/profile/entities/profile.entity"
 import styles from "./profile-header.module.css"
 
+const API_BASE_URL = `http://${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}`;
+
 export const ProfileHeader = ({ fullname, phone, photoUrl }: ProfileHeaderProps) => {
     const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
-
+    const avatarSrc = photoUrl ? `${API_BASE_URL}${photoUrl}` : defaultAvatar;
     return (
         <header className={styles.headerContainer}>
             {/* Indicador superior estilo Terminal ISSP */}
@@ -20,7 +22,7 @@ export const ProfileHeader = ({ fullname, phone, photoUrl }: ProfileHeaderProps)
                 <div className={styles.avatarWrapper}>
                     <div className={styles.avatarFrame}>
                         <img
-                            src={photoUrl || defaultAvatar}
+                            src={avatarSrc || defaultAvatar}
                             alt={`Foto de ${fullname}`}
                             className={styles.avatarImage}
                         />

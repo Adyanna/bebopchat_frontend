@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { Perfil, ProfileUpdateDTO } from "@features/profile/entities/profile.entity"
 import styles from "./profile-form.module.css"
+import { uploadFile } from "@core/services/upload.service"
 
 interface ProfileFormProps {
     initialData?: Perfil;
@@ -17,6 +18,7 @@ export const ProfileForm = ({ initialData, onSave }: ProfileFormProps) => {
         descripcion: initialData?.descripcion ?? ""
     });
 
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     // Sincronizar el estado si initialData cambia (por ejemplo, tras cargar la API)
@@ -35,7 +37,14 @@ export const ProfileForm = ({ initialData, onSave }: ProfileFormProps) => {
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
     ) => {
-        const { name, value } = e.target;
+        const { name, value, type } = e.target;
+        if (type === "file") {
+            const input = e.target as HTMLInputElement;
+            if (input.files?.[0]) {
+                setSelectedFile(input.files[0]); // Guardamos el File en el estado local
+            }
+            return;
+        }
         setFormData((prev) => ({
             ...prev,
             [name]: name === "descripcion" || name === "photoUrl" ? value : Number(value)
@@ -46,7 +55,11 @@ export const ProfileForm = ({ initialData, onSave }: ProfileFormProps) => {
         e.preventDefault();
         try {
             setIsSubmitting(true);
-            await onSave(formData);
+            let finalPhotoUrl = formData.photoUrl;
+            if (selectedFile) {
+                finalPhotoUrl = await uploadFile(selectedFile, 'photos');
+            }
+            await onSave({ ...formData, photoUrl: finalPhotoUrl });
         } finally {
             setIsSubmitting(false);
         }
@@ -119,15 +132,14 @@ export const ProfileForm = ({ initialData, onSave }: ProfileFormProps) => {
                 {/* URL Foto de Perfil */}
                 <div className={styles.fieldGroup}>
                     <label htmlFor="photoUrl" className={styles.label}>
-                        URL FOTO DE PERFIL
+                        FOTO DE PERFIL
                     </label>
                     <input
-                        type="text"
+                        type="file"
                         id="photoUrl"
                         name="photoUrl"
-                        value={formData.photoUrl}
+                        accept="image/png, image/jpeg, image/jpg"
                         onChange={handleChange}
-                        placeholder="/assets/photo.jpg"
                         className={styles.input}
                     />
                 </div>
