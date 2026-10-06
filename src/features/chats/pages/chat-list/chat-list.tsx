@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router';
-import { ChatListHeader } from '../../components/chat-list/chat-list-header';
-import { ChatListBody } from '../../components/chat-list/chat-list-body';
-import { ChatListFooter } from '../../components/chat-list/chat-list-footer';
+import { ChatListHeader } from '../../components/chat-list-header/chat-list-header';
+import { ChatListBody } from '../../components/chat-list-body/chat-list-body';
+import { ChatListFooter } from '../../components/chat-list-footer/chat-list-footer';
 import { chatService } from '../../services/chat-list.service';
 import type { Chat } from '../../entities/chat.entity';
 import style from './chat-list.module.css';
@@ -52,11 +52,6 @@ export const ChatList = () => {
                 />
                 <ChatListFooter onNewChat={handleNewChat} />
             </aside>
-
-            {/* Panel derecho principal (detalle del chat activo) */}
-            <main className={style.content}>
-                <Outlet />
-            </main>
         </div>
     );
 };

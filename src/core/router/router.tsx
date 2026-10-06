@@ -7,8 +7,8 @@ import { redirect } from 'react-router';
 import App from '@core/components/app/App';
 
 
-// import { ProtectedRoute } from '@core/guards/protected-route';
-// import { NotFoundPage } from '@core/components/not-found/not-found';
+import { ProtectedRoute } from '@core/guards/protected-route';
+import { NotFoundPage } from '@core/components/not-found/not-found';
 //const App = React.lazy(() => import('@core/components/app/App'));
 const HomePage = React.lazy(() => import('@features/home/pages/home-page/home-page'));
 const ServicesPage = React.lazy(() => import('@features/home/pages/services-page/services-page'));
@@ -45,18 +45,22 @@ export const Router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProfilePage />,
+        loader: ProtectedRoute,
       },
       {
         path: 'chats',
         element: <ChatPage />,
+        loader: ProtectedRoute,
         children: [
           {
             index: true,
             element: <ChatEmpty />,
+            loader: ProtectedRoute,
           },
           {
             path: ':id',
             element: <ChatWindow />,
+            loader: ProtectedRoute,
           },
         ],
       },
@@ -81,7 +85,7 @@ export const Router = createBrowserRouter([
     element: <SigninPage />,
   },
 
-  /*
+
   {
     path: '/logout',
     element: <HomePage />,
@@ -90,5 +94,4 @@ export const Router = createBrowserRouter([
     path: '*',
     element: <NotFoundPage />,
   },
-  */
 ]);
