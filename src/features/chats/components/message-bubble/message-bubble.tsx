@@ -6,6 +6,8 @@ type Props = {
     id: number;
     senderId: number;
     content: string;
+    createAt: string;
+    updatedAt: string;
     onDelete: (messageId: number) => void;
     onEdit: (messageId: number, newContent: string) => Promise<void>;
 }
@@ -14,6 +16,8 @@ export function MessageBuble({
     id,
     senderId,
     content,
+    createAt,
+    updatedAt,
     onDelete,
     onEdit
 }: Props) {
@@ -39,6 +43,8 @@ export function MessageBuble({
         setIsEditing(false);
     };
 
+    const isEdited = updatedAt !== createAt;
+
     useEffect(() => {
         if (!menuOpen) return;
 
@@ -54,6 +60,11 @@ export function MessageBuble({
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, [menuOpen]);
+
+    const messageTime = new Date(createAt).toLocaleTimeString("es-MX", {
+        hour: "numeric",
+        minute: "2-digit",
+    });
 
     return (
         <div className={`${clasStyle} relative`}>
@@ -131,7 +142,10 @@ export function MessageBuble({
                 <div className="break-words">{content}</div>
             )}
             {/*Mejorar fecha traida del backend*/}
-            <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">4:08 p.m.</div>
+            <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">
+                {isEdited && <span>Editado · </span>}
+                {messageTime}
+            </div>
         </div>
     )
 }  

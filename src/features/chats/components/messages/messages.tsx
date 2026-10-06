@@ -56,6 +56,8 @@ export const Messages = ({
                     key={message.id}
                     senderId={message.senderId}
                     content={message.content}
+                    createAt={message.createAt}
+                    updatedAt={message.updatedAt}
                     onDelete={removeMessage}
                     onEdit={editMessage}
                 />))}

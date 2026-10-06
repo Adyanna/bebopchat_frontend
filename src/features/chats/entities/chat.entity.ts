@@ -1,19 +1,19 @@
 export interface Participant {
-  userId: number;
-  fullname: string;
-  role: string;
+    userId: number;
+    fullname: string;
+    role: string;
 }
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
-  name: string;
-  description: string;
-  participantIds: number[];
+    name: string;
+    description: string;
+    participantIds: number[];
 }
 
 // Respuesta estructurada del Backend (GET /users/me/chats)
 export interface GetChatsResponse {
-  data: Chat[];
+    data: Chat[];
 }
 
 export type ChatType = "INDIVIDUAL" | "GROUP";
@@ -56,7 +56,8 @@ export type Chat = {
 
 export type Message = {
     id: number;
-    createdAt: Date;
+    createAt: string;
+    updatedAt: string;
     content: string;
     type: MessageType;
     chatId: number;
