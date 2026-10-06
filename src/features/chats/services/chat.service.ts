@@ -88,3 +88,67 @@ export async function createMessage(chatId: number, content: string): Promise<Me
 
     return data;
 }
+
+export async function deleteMessage(
+    chatId: number,
+    messageId: number
+): Promise<void> {
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/messages/${messageId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    if (!response.ok) {
+        const data = await response.json();
+
+        throw new Error(
+            data.errors?.join("\n") ||
+            data.message ||
+            "Error al eliminar el mensaje"
+        );
+    }
+}
+
+
+export async function updateMessage(
+    chatId: number,
+    messageId: number,
+    newContent: string
+): Promise<Message> {
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/messages/${messageId}`,
+        {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ newContent }),
+        }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            data.errors?.join("\n") ||
+            data.message ||
+            "Error al editar el mensaje"
+        );
+    }
+
+    return data;
+}
