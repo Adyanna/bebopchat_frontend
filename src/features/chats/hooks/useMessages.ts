@@ -1,6 +1,6 @@
 import type { Message } from "../entities/chat.entity";
 import { useEffect, useState } from "react";
-import { getMessages, deleteMessage as deleteMessageService } from "../services/chat.service";
+import { getMessages, updateMessage, deleteMessage } from "../services/chat.service";
 
 
 export function useMessages(chatId: number) {
@@ -41,10 +41,29 @@ export function useMessages(chatId: number) {
     };
 
     const removeMessage = async (messageId: number) => {
-        await deleteMessageService(chatId, messageId);
+        await deleteMessage(chatId, messageId);
 
         setMessages(prev =>
             prev.filter(message => message.id !== messageId)
+        );
+    };
+
+    const editMessage = async (
+        messageId: number,
+        newContent: string
+    ) => {
+        const updatedMessage = await updateMessage(
+            chatId,
+            messageId,
+            newContent
+        );
+
+        setMessages(prev =>
+            prev.map(message =>
+                message.id === messageId
+                    ? updatedMessage
+                    : message
+            )
         );
     };
 
@@ -54,6 +73,7 @@ export function useMessages(chatId: number) {
         isFetchingMore,
         hasMore,
         addMessage,
-        removeMessage
+        removeMessage,
+        editMessage
     }
 }

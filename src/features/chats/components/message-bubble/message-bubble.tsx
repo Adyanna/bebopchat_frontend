@@ -1,5 +1,5 @@
 import { useUser } from "@features/users/hooks/useUser";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./message-bubble.css"
 
 type Props = {
@@ -7,12 +7,21 @@ type Props = {
     senderId: number;
     content: string;
     onDelete: (messageId: number) => void;
+    onEdit: (messageId: number, newContent: string) => Promise<void>;
 }
 
-export function MessageBuble({ id, senderId, content, onDelete }: Props) {
+export function MessageBuble({
+    id,
+    senderId,
+    content,
+    onDelete,
+    onEdit
+}: Props) {
     const { userData } = useUser();
     const currentId = userData?.id;
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState(content);
 
     const currentUser =
         "flex w-fit max-w-[65%] flex-col self-end rounded-2xl rounded-br-md bg-[#A8C686] !px-6 py-3 text-left text-sm text-[#263238] shadow-sm";
@@ -22,6 +31,30 @@ export function MessageBuble({ id, senderId, content, onDelete }: Props) {
 
     const clasStyle = senderId === currentId ? currentUser : otherUser;
     const isCurrentUser = senderId === currentId;
+
+    const handleEdit = async () => {
+        if (!editedContent.trim()) return;
+
+        await onEdit(id, editedContent);
+        setIsEditing(false);
+    };
+
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [menuOpen]);
+
     return (
         <div className={`${clasStyle} relative`}>
             {isCurrentUser && (
@@ -53,9 +86,19 @@ export function MessageBuble({ id, senderId, content, onDelete }: Props) {
                                 type="button"
                                 onClick={() => {
                                     setMenuOpen(false);
+                                    setIsEditing(true);
+                                }}
+                                className="message-buttons"
+                            >
+                                Editar
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setMenuOpen(false);
                                     onDelete(id);
                                 }}
-                                className="message-delete-button"
+                                className="message-buttons"
                             >
                                 Eliminar
                             </button>
@@ -63,7 +106,30 @@ export function MessageBuble({ id, senderId, content, onDelete }: Props) {
                     )}
                 </>
             )}
-            <div className="break-words">{content}</div>
+            {isEditing ? (
+                <div className="message-edit-container">
+                    <input
+                        className="message-edit-input"
+                        value={editedContent}
+                        onChange={(e) => setEditedContent(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handleEdit();
+                            }
+                        }}
+                    />
+
+                    <button
+                        type="button"
+                        onClick={handleEdit}
+                        className="message-save-button"
+                    >
+                        Guardar
+                    </button>
+                </div>
+            ) : (
+                <div className="break-words">{content}</div>
+            )}
             {/*Mejorar fecha traida del backend*/}
             <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">4:08 p.m.</div>
         </div>

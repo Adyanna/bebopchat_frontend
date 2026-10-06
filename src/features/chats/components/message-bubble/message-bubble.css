@@ -47,7 +47,7 @@
     box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
 }
 
-.message-delete-button {
+.message-buttons {
     width: 100%;
     padding: 8px 12px;
 
@@ -62,7 +62,59 @@
     cursor: pointer;
 }
 
-.message-delete-button:hover {
+.message-buttons:hover {
     background-color: rgb(248 113 113 / 10%);
     color: #fecaca;
+}
+
+/* ===== EDIT MESSAGE ===== */
+
+.message-edit-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.message-edit-input {
+    min-width: 180px;
+    padding: 7px 10px;
+
+    border: 1px solid rgb(102 252 241 / 40%);
+    border-radius: 6px;
+    outline: none;
+
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    font-size: 14px;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.message-edit-input:focus {
+    border-color: #66fcf1;
+    box-shadow: 0 0 6px rgb(102 252 241 / 20%);
+}
+
+.message-save-button {
+    padding: 7px 10px;
+
+    border: 1px solid rgb(102 252 241 / 40%);
+    border-radius: 6px;
+
+    background-color: rgb(102 252 241 / 10%);
+    color: #66fcf1;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.message-save-button:hover {
+    border-color: #66fcf1;
+    background-color: rgb(102 252 241 / 20%);
 }

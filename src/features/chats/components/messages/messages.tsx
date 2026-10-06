@@ -11,9 +11,18 @@ type Props = {
     hasMore: boolean;
     messageError: string | null;
     removeMessage: (messageId: number) => void;
+    editMessage: (messageId: number, newContent: string) => Promise<void>;
 }
 
-export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore, messageError, removeMessage }: Props) => {
+export const Messages = ({
+    messages,
+    fetchMore,
+    isFetchingMore,
+    hasMore,
+    messageError,
+    removeMessage,
+    editMessage
+}: Props) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
@@ -48,6 +57,7 @@ export const Messages = ({ messages, fetchMore, isFetchingMore, hasMore, message
                     senderId={message.senderId}
                     content={message.content}
                     onDelete={removeMessage}
+                    onEdit={editMessage}
                 />))}
             {messageError && <div className="message-error">
                 <svg
