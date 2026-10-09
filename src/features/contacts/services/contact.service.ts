@@ -1,4 +1,4 @@
-import type { GetMyContactsDTO, GetMyContactsResponseDTO, UserContact } from "../entities/contact.entity";
+import type { GetMyContactsDTO, GetMyContactsResponseDTO, UserContact } from "@features/contacts/entities/contact.entity";
 
 
 
@@ -33,7 +33,7 @@ export const contactService = {
     },
 
     // GET /users/me/contacts
-    async getMyContacts(params: GetMyContactsDTO): Promise<GetMyContactsResponseDTO> {
+    async getMyContacts(params: GetMyContactsDTO = {}): Promise<GetMyContactsResponseDTO> {
         const query = new URLSearchParams();
 
         if (params.search) query.set("search", params.search);

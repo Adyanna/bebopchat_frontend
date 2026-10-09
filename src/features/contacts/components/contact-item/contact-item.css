@@ -1,0 +1,131 @@
+.contact-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 88px;
+    padding: 16px 20px;
+
+    background: linear-gradient(100deg,
+            #111923 0%,
+            #17232e 55%,
+            #101820 100%);
+
+    border-bottom: 1px solid rgb(102 252 241 / 18%);
+    color: #c5c6c7;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Línea luminosa lateral */
+.contact-item::before {
+    content: "";
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    width: 3px;
+    background: #66fcf1;
+    opacity: 0;
+    box-shadow: 0 0 10px rgb(102 252 241 / 65%);
+    transition: opacity 0.2s ease;
+}
+
+.contact-item:hover {
+    background: linear-gradient(100deg,
+            #172630,
+            #1f2833 65%,
+            #15212b);
+    border-bottom-color: rgb(102 252 241 / 45%);
+}
+
+.contact-item:hover::before {
+    opacity: 1;
+}
+
+/* Avatar */
+.contact-item__avatar {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #66fcf1;
+    box-shadow: 0 0 8px rgb(102 252 241 / 18%);
+}
+
+/* Información */
+.contact-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-item__name {
+    margin: 0;
+    color: #f0f2f3;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    overflow-wrap: anywhere;
+}
+
+.contact-item__status {
+    display: inline-block;
+    margin-top: 4px;
+    color: #8299a8;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Acciones */
+.contact-item__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.contact-item__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    border: 1px solid rgb(102 252 241 / 30%);
+    border-radius: 5px;
+    background: #111923;
+    color: #66fcf1;
+
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contact-item__button svg {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-item__button:hover {
+    background: rgb(102 252 241 / 10%);
+    border-color: #66fcf1;
+    box-shadow: 0 0 9px rgb(102 252 241 / 15%);
+}
+
+/* Acento naranja para el menú */
+.contact-item__button:last-child {
+    color: #ffad42;
+    border-color: rgb(255 173 66 / 25%);
+}
+
+.contact-item__button:last-child:hover {
+    background: rgb(255 173 66 / 9%);
+    border-color: #ffad42;
+    box-shadow: 0 0 9px rgb(255 173 66 / 15%);
+}

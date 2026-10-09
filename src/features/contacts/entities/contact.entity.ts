@@ -5,6 +5,7 @@ export interface Contact {
     userContactId: number;
     phone: string,
     fullname: string;
+    profilePicture: string;
 }
 
 

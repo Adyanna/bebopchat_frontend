@@ -1,7 +1,7 @@
 import type { TargetUser } from "@features/chats/entities/chat.entity";
 import { useState } from "react";
 import "./user-card.css";
-import { contactService } from "@features/chats/services/contact.service";
+import { contactService } from "@features/contacts/services/contact.service";
 
 type props = {
     user: TargetUser,

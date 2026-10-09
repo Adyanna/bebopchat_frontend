@@ -1,6 +1,7 @@
 import ChatPage from '@features/chats/pages/chat-page/chat-page';
 import ChatEmpty from '@features/chats/pages/chat-empty/chat-empty';
 import ChatWindow from '@features/chats/pages/chat-window/chat-window';
+import ContactsPage from '@features/contacts/pages/contacts-page';
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import { redirect } from 'react-router';
@@ -65,10 +66,11 @@ export const Router = createBrowserRouter([
         ],
       },
 
-      // {
-      //   path: 'products/:id',
-      //   element: <ProductDetailPage />,
-      // },
+      {
+        path: 'contacts',
+        element: <ContactsPage />,
+        loader: ProtectedRoute,
+      },
       // {
       //   path: 'products/new',
       //   loader: ProtectedRoute,
