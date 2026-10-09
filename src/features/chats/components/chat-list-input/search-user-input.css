@@ -61,45 +61,6 @@
     cursor: not-allowed;
 }
 
-.search-user__card {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 10px;
-    border: 1px solid rgb(102 252 241 / 22%);
-    border-radius: 8px;
-    background: #1F2833;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
-    min-width: 0;
-}
-
-.search-user__avatar {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid rgb(102 252 241 / 45%);
-}
-
-.search-user__info {
-    min-width: 0;
-}
-
-.search-user__name {
-    margin: 0 0 4px;
-    color: #C5C6C7;
-    font-size: 13px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-}
-
-.search-user__phone {
-    margin: 0;
-    color: #9BA5B0;
-    font-size: 11px;
-    overflow-wrap: anywhere;
-}
 
 .search-user__error {
     margin: 0;

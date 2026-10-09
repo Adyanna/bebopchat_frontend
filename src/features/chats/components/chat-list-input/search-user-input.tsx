@@ -2,6 +2,7 @@ import { useState } from "react";
 import { chatService } from "@features/chats/services/chat-list.service";
 import { type TargetUser } from "@features/chats/entities/chat.entity";
 import "./search-user-input.css";
+import { UserCard } from "../user-card/user-card";
 
 export function SearchUserInput() {
     const [phone, setPhone] = useState("");
@@ -20,7 +21,7 @@ export function SearchUserInput() {
             const errorMessage =
                 error instanceof Error
                     ? error.message
-                    : "Unable to find this user";
+                    : "No fue posible encontrar al usuario";
 
             setError(errorMessage);
         }
@@ -37,11 +38,11 @@ export function SearchUserInput() {
                     name="phone"
                     value={phone}
                     onChange={(event) => {
-                        setPhone(event.target.value),
-                            setUser(null);
-                        setError(null)
+                        setPhone(event.target.value);
+                        setUser(null);
+                        setError(null);
                     }}
-                    placeholder="Search by phone number"
+                    placeholder="Buscar por teléfono..."
                     className="search-user__input"
                 />
 
@@ -50,20 +51,7 @@ export function SearchUserInput() {
                 </button>
             </form>
 
-            {user && (
-                <div className="search-user__card">
-
-                    <img
-                        src={user.profilePicture || defaultAvatar}
-                        alt={`${user.fullname} profile picture`}
-                        className="search-user__avatar"
-                    />
-                    <div className="search-user__info">
-                        <p className="search-user__name">{user.fullname}</p>
-                        <p className="search-user__phone">{user.phone}</p>
-                    </div>
-                </div>
-            )}
+            {user && (<UserCard user={user} defaultAvatar={defaultAvatar} />)}
 
             {error && (
                 <p className="search-user__error" role="alert">
