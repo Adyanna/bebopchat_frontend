@@ -1,4 +1,4 @@
-import type { Chat, CreateChatDTO,GetChatsResponse } from '../entities/chat.entity';
+import type { Chat, CreateChatDTO, GetChatsResponse, TargetUser } from '../entities/chat.entity';
 
 const API_URL = `http://${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}`;
 
@@ -39,4 +39,17 @@ export const chatService = {
 
     return response.json();
   },
-};
+
+  async searchUser(phone: string): Promise<TargetUser> {
+    const response = await fetch(`${API_URL}/users?phone=${encodeURIComponent(phone)}`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      throw new Error('Unable to get user');
+    }
+
+    return response.json();
+  }
+}

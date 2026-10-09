@@ -70,3 +70,10 @@ export type MessageResponse = {
         limit: number
     }
 }
+
+export interface TargetUser {
+    id: string
+    fullname: string,
+    phone: string,
+    profilePicture: string | null;
+}

@@ -1,0 +1,114 @@
+.search-user {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-user__form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.search-user__input {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 11px;
+    border: 1px solid rgb(102 252 241 / 20%);
+    border-radius: 6px;
+    outline: none;
+    background: #0B0C10;
+    color: #C5C6C7;
+    font-size: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-user__input::placeholder {
+    color: #777E86;
+}
+
+.search-user__input:focus {
+    border-color: #66FCF1;
+    box-shadow: 0 0 6px rgb(102 252 241 / 15%);
+}
+
+.search-user__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border: 1px solid rgb(102 252 241 / 30%);
+    border-radius: 6px;
+    background: #1F2833;
+    color: #66FCF1;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.search-user__button:hover:not(:disabled) {
+    background: rgb(102 252 241 / 12%);
+    border-color: #66FCF1;
+}
+
+.search-user__button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.search-user__card {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px;
+    border: 1px solid rgb(102 252 241 / 22%);
+    border-radius: 8px;
+    background: #1F2833;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    min-width: 0;
+}
+
+.search-user__avatar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgb(102 252 241 / 45%);
+}
+
+.search-user__info {
+    min-width: 0;
+}
+
+.search-user__name {
+    margin: 0 0 4px;
+    color: #C5C6C7;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.search-user__phone {
+    margin: 0;
+    color: #9BA5B0;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.search-user__error {
+    margin: 0;
+    padding: 7px 9px;
+    border-left: 2px solid #FF6B6B;
+    border-radius: 3px;
+    background: rgb(255 107 107 / 8%);
+    color: #FF9999;
+    font-size: 11px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
