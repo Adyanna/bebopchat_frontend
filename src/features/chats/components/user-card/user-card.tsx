@@ -6,10 +6,11 @@ import { contactService } from "@features/contacts/services/contact.service";
 type props = {
     user: TargetUser,
     defaultAvatar: string,
+    onCreate: (targetId: number) => void
 }
 
 
-export function UserCard({ user, defaultAvatar }: props) {
+export function UserCard({ user, defaultAvatar, onCreate }: props) {
     const [isAdded, setIsAdded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [hasAddError, setHasAddError] = useState(false);
@@ -26,6 +27,10 @@ export function UserCard({ user, defaultAvatar }: props) {
             setIsLoading(false);
         }
 
+    }
+
+    function handleCreateChat() {
+        onCreate(user.id)
     }
 
 
@@ -88,6 +93,7 @@ export function UserCard({ user, defaultAvatar }: props) {
                     type="button"
                     aria-label="Start chat"
                     title="Start chat"
+                    onClick={handleCreateChat}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

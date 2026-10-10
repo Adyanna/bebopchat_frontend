@@ -72,7 +72,7 @@ export type MessageResponse = {
 }
 
 export interface TargetUser {
-    id: string
+    id: number
     fullname: string,
     phone: string,
     profilePicture: string | null;

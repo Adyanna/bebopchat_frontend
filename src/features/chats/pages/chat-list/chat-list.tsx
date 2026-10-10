@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { ChatListHeader } from '../../components/chat-list-header/chat-list-header';
 import { ChatListBody } from '../../components/chat-list-body/chat-list-body';
-import { ChatListFooter } from '../../components/chat-list-footer/chat-list-footer';
 import { chatService } from '../../services/chat-list.service';
 import type { Chat } from '../../entities/chat.entity';
 import style from './chat-list.module.css';
@@ -35,10 +34,6 @@ export const ChatList = () => {
         navigate(`/chats/${chatId}`);
     };
 
-    const handleNewChat = () => {
-        // Acción pendiente para crear nuevo chat
-    };
-
     return (
         <div className={style.chatPageContainer}>
             {/* Panel lateral izquierdo con la lista de chats */}
@@ -50,7 +45,6 @@ export const ChatList = () => {
                     activeChatId={activeChatId ? Number(activeChatId) : undefined}
                     onSelectChat={handleSelectChat}
                 />
-                <ChatListFooter onNewChat={handleNewChat} />
             </aside>
         </div>
     );

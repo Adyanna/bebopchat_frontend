@@ -4,7 +4,13 @@ import { type TargetUser } from "@features/chats/entities/chat.entity";
 import "./search-user-input.css";
 import { UserCard } from "../user-card/user-card";
 
-export function SearchUserInput() {
+interface Props {
+    onCreate: (targetId: number) => void;
+    showUser: boolean;
+    onNewSearch: () => void;
+}
+
+export function SearchUserInput({ onCreate, showUser, onNewSearch }: Props) {
     const [phone, setPhone] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<TargetUser | null>(null);
@@ -41,6 +47,7 @@ export function SearchUserInput() {
                         setPhone(event.target.value);
                         setUser(null);
                         setError(null);
+                        onNewSearch();
                     }}
                     placeholder="Buscar por teléfono..."
                     className="search-user__input"
@@ -51,7 +58,7 @@ export function SearchUserInput() {
                 </button>
             </form>
 
-            {user && (<UserCard user={user} defaultAvatar={defaultAvatar} />)}
+            {user && showUser && (<UserCard user={user} defaultAvatar={defaultAvatar} onCreate={onCreate} />)}
 
             {error && (
                 <p className="search-user__error" role="alert">
