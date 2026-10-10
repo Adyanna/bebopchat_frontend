@@ -1,6 +1,8 @@
 import { useContacs } from "@features/contacts/hooks/useContacts"
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, } from "react";
 import { ContactItem } from "../contact-item/contact-item";
+import { useNavigate } from "react-router";
+import { chatService } from "@features/chats/services/chat-list.service";
 import './contact-list.css'
 
 export function ContactList() {
@@ -15,7 +17,7 @@ export function ContactList() {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const element = containerRef.current;
         if (!element || contacts.length === 0) return;
@@ -38,6 +40,20 @@ export function ContactList() {
         }
     }
 
+    async function handleCreateChat(targetId: number) {
+        try {
+            const chat = await chatService.createChat({
+                participantIds: [targetId]
+            });
+
+            navigate(`/chats/${chat.id}`);
+
+        } catch (error) {
+            console.error('Error al cargar el chat', error);
+        }
+
+    }
+
     if (isLoading) return <p>Cargando...</p>
     if (error) return <p>{error}</p>
 
@@ -48,8 +64,10 @@ export function ContactList() {
             {contacts.map((contact) => (
                 <ContactItem
                     key={contact.contactId}
+                    targetId={contact.userContactId}
                     fullname={contact.fullname}
                     profilePicture={contact.profilePicture}
+                    onCreate={handleCreateChat}
                 />
             ))}
         </div>

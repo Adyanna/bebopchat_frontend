@@ -34,7 +34,11 @@ export const chatService = {
     });
 
     if (!response.ok) {
-      throw new Error('Error al crear el chat');
+      const errorData = await response.json();
+      console.error('Error del backend:', response.status, errorData);
+      throw new Error(
+        errorData.error ?? JSON.stringify(errorData)
+      );
     }
 
     return response.json();

@@ -6,8 +6,8 @@ export interface Participant {
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     participantIds: number[];
 }
 

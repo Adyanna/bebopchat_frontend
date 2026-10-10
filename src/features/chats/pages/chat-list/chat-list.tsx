@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { ChatListHeader } from '../../components/chat-list-header/chat-list-header';
 import { ChatListBody } from '../../components/chat-list-body/chat-list-body';
 import { ChatListFooter } from '../../components/chat-list-footer/chat-list-footer';

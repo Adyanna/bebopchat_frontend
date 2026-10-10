@@ -1,15 +1,21 @@
+import { ButtonCreateChat } from "@features/chats/components/buttons-create-chat/button-create-chat";
 import "./contact-item.css";
 
 type Props = {
+    targetId: number;
     fullname: string;
     profilePicture: string | null;
+    onCreate: (targetId: number) => void
 };
 
 export function ContactItem({
+    targetId,
     fullname,
     profilePicture,
+    onCreate
 }: Props) {
     const defaultAvatar = "/src/assets/default-bounty-hunter.svg";
+
 
     return (
         <div className="contact-item">
@@ -25,17 +31,11 @@ export function ContactItem({
             </div>
 
             <div className="contact-item__actions">
-                <button
-                    type="button"
-                    className="contact-item__button"
-                    aria-label={`Send message to ${fullname}`}
-                    title="Enviar mensaje"
-                >
-                    {/* Icono de mensaje */}
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 3a9 9 0 0 0-7.5 14l-1 4 4.2-1A9 9 0 1 0 12 3Z" />
-                    </svg>
-                </button>
+                <ButtonCreateChat
+                    targetId={targetId}
+                    onCreate={onCreate}
+                    fullname={fullname}
+                />
 
                 <button
                     type="button"
