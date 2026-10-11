@@ -4,7 +4,11 @@ import { chatService } from "@features/chats/services/chat-list.service";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
-export const ChatListHeader = () => {
+type Props = {
+    onChatCreated: () => Promise<void>;
+};
+
+export const ChatListHeader = ({ onChatCreated }: Props) => {
     const navigate = useNavigate();
     const [showUser, setShowUser] = useState(true);
 
@@ -13,6 +17,9 @@ export const ChatListHeader = () => {
             const chat = await chatService.createChat({
                 participantIds: [targetId]
             });
+
+            await onChatCreated();
+
             setShowUser(false);
 
             navigate(`/chats/${chat.id}`);

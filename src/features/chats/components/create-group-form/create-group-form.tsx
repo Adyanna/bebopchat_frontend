@@ -6,10 +6,11 @@ import './create-group-form.css'
 
 interface Props {
     onClose: () => void;
+    onChatCreated: () => Promise<void>;
 }
 
 
-export function CreateGroupForm({ onClose }: Props) {
+export function CreateGroupForm({ onClose, onChatCreated }: Props) {
     const { contacts, isLoading, error } = useContacs();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -41,6 +42,7 @@ export function CreateGroupForm({ onClose }: Props) {
                 description: description.trim(),
                 participantIds: selectedIds,
             });
+            await onChatCreated();
             onClose();
             navigate(`/chats/${chat.id}`);
         } catch (error) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { ChatListHeader } from '../../components/chat-list-header/chat-list-header';
 import { ChatListBody } from '../../components/chat-list-body/chat-list-body';
@@ -16,22 +16,38 @@ export const ChatList = () => {
     const navigate = useNavigate();
     const { id: activeChatId } = useParams<{ id: string }>();
 
-    useEffect(() => {
-        const fetchChats = async () => {
-            try {
-                setLoading(true);
-                const response = await chatService.getMyChats();
-                // Extraemos la propiedad 'data' del objeto recibido ({ data: Chat[] })
-                setChats(response.data || []);
-            } catch (error) {
-                console.error('Error al cargar la lista de chats:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchChats = async () => {
+    //         try {
+    //             setLoading(true);
+    //             const response = await chatService.getMyChats();
+    //             // Extraemos la propiedad 'data' del objeto recibido ({ data: Chat[] })
+    //             setChats(response.data || []);
+    //         } catch (error) {
+    //             console.error('Error al cargar la lista de chats:', error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchChats();
+    //     fetchChats();
+    // }, []);
+
+    const fetchChats = useCallback(async () => {
+        try {
+            setLoading(true);
+            const response = await chatService.getMyChats();
+            setChats(response.data || []);
+        } catch (error) {
+            console.error('Error al cargar la lista de chats:', error);
+        } finally {
+            setLoading(false);
+        }
     }, []);
+
+    useEffect(() => {
+        fetchChats();
+    }, [fetchChats]);
 
     const handleSelectChat = (chatId: number) => {
         navigate(`/chats/${chatId}`);
@@ -42,7 +58,7 @@ export const ChatList = () => {
         <div className={style.chatPageContainer}>
             {/* Panel lateral izquierdo con la lista de chats */}
             <aside className={style.sidebar}>
-                <ChatListHeader />
+                <ChatListHeader onChatCreated={fetchChats} />
                 <ChatListBody
                     chats={chats}
                     loading={loading}
@@ -54,7 +70,10 @@ export const ChatList = () => {
             {showGroupForm && (
                 <div className={style.groupModalOverlay}>
                     <div className={style.groupModal}>
-                        <CreateGroupForm onClose={() => setShowGroupForm(false)} />
+                        <CreateGroupForm
+                            onClose={() => setShowGroupForm(false)}
+                            onChatCreated={fetchChats}
+                        />
                     </div>
                 </div>
             )}
