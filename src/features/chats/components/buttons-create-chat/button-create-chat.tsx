@@ -22,7 +22,11 @@ export function ButtonCreateChat({ targetId, onCreate, fullname }: Props) {
             title="Enviar mensaje"
         >
             {/* Icono de mensaje */}
-            <svg viewBox="0 0 24 24" fill="currentColor">
+            <svg viewBox="0 0 24 24" width="18"
+                height="18"
+                fill="currentColor"
+                aria-hidden="true">
+
                 <path d="M12 3a9 9 0 0 0-7.5 14l-1 4 4.2-1A9 9 0 1 0 12 3Z" />
             </svg>
         </button>

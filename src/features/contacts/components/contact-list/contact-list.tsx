@@ -12,7 +12,8 @@ export function ContactList() {
         hasMore,
         fetchMore,
         error,
-        isLoading
+        isLoading,
+        deleteContact
     } = useContacs();
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -68,6 +69,7 @@ export function ContactList() {
                     fullname={contact.fullname}
                     profilePicture={contact.profilePicture}
                     onCreate={handleCreateChat}
+                    onDelete={deleteContact}
                 />
             ))}
         </div>
