@@ -1,4 +1,5 @@
 import type { ChatParticipant } from "@features/chats/entities/chat.entity";
+import { ConfirmRemoveParticipant } from "./confirm-remove-participant";
 import { useState } from "react";
 import "./group-info-panel.css";
 
@@ -9,6 +10,7 @@ type Props = {
     participants: ChatParticipant[];
     onClose: () => void;
     currentUserId: number;
+    onRemoveParticipant: (userId: number) => Promise<void>;
 };
 
 export const GroupInfoPanel = ({
@@ -18,13 +20,17 @@ export const GroupInfoPanel = ({
     participants,
     onClose,
     currentUserId,
+    onRemoveParticipant
 }: Props) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(name ?? "");
     const [editedDescription, setEditedDescription] = useState(description ?? "");
-
     const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [selectedParticipantId, setSelectedParticipantId] = useState<number | null>(null);
+    const [isRemoving, setIsRemoving] = useState(false);
+    const [removeError, setRemoveError] = useState<string | null>(null);
+    const [participantToRemove, setParticipantToRemove] = useState<ChatParticipant | null>(null);
 
     const handleSave = async () => {
         const trimmedName = editedName.trim();
@@ -49,6 +55,27 @@ export const GroupInfoPanel = ({
             );
         } finally {
             setIsSaving(false);
+        }
+    };
+
+    const handleRemoveParticipant = async (userId: number) => {
+        if (!participantToRemove) return;
+
+        setIsRemoving(true);
+        setRemoveError(null);
+
+        try {
+            await onRemoveParticipant(userId);
+            setSelectedParticipantId(null);
+            setParticipantToRemove(null);
+        } catch (error) {
+            setRemoveError(
+                error instanceof Error
+                    ? error.message
+                    : "No se pudo eliminar al participante",
+            );
+        } finally {
+            setIsRemoving(false);
         }
     };
 
@@ -215,21 +242,60 @@ export const GroupInfoPanel = ({
                                 {isAdmin &&
                                     !isCurrentUser &&
                                     participant.role !== "ADMIN" && (
-                                        <button
-                                            type="button"
-                                            className="group-info-panel__participant-menu"
-                                            aria-label={`Opciones de ${participant.fullname}`}
-                                            title="Opciones del participante"
-                                        >
-                                            ⋯
-                                        </button>
+                                        <>
+                                            <button
+                                                type="button"
+                                                className="group-info-panel__participant-menu"
+                                                aria-label={`Opciones de ${participant.fullname}`}
+                                                title="Opciones del participante"
+                                                onClick={() =>
+                                                    setSelectedParticipantId(
+                                                        selectedParticipantId === participant.userId
+                                                            ? null
+                                                            : participant.userId,
+                                                    )
+                                                }
+                                            >
+                                                ⋯
+                                            </button>
+
+                                            {selectedParticipantId === participant.userId && (
+                                                <button
+                                                    type="button"
+                                                    className="group-info-panel__remove-participant"
+                                                    disabled={isRemoving}
+                                                    onClick={() => setParticipantToRemove(participant)}
+                                                >
+                                                    {"Eliminar participante"}
+                                                </button>
+                                            )}
+                                        </>
                                     )
                                 }
                             </li>
                         );
                     })}
                 </ul>
+                {removeError && (
+                    <p className="group-info-panel__error" role="alert">
+                        {removeError}
+                    </p>
+                )}
             </div>
+            {participantToRemove && (
+                <ConfirmRemoveParticipant
+                    participantName={participantToRemove.fullname}
+                    isRemoving={isRemoving}
+                    error={removeError}
+                    onCancel={() => {
+                        setParticipantToRemove(null);
+                        setRemoveError(null);
+                    }}
+                    onConfirm={() =>
+                        handleRemoveParticipant(participantToRemove.userId)
+                    }
+                />
+            )}
         </section>
     );
 };

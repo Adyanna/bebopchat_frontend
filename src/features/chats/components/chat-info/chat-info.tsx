@@ -12,10 +12,11 @@ type Props = {
     name: string | null;
     description: string | null;
     onSave: (name: string, description: string) => Promise<void>;
+    onRemoveParticipant: (userId: number) => Promise<void>;
 }
 
 
-export const ChatInfo = ({ type, participants, name, description, onSave }: Props) => {
+export const ChatInfo = ({ type, participants, name, description, onSave, onRemoveParticipant }: Props) => {
     const { userData } = useUser();
     const currentUserId = userData?.id;
     const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
@@ -102,6 +103,7 @@ export const ChatInfo = ({ type, participants, name, description, onSave }: Prop
                             currentUserId={currentUserId}
                             onClose={() => setIsGroupInfoOpen(false)}
                             onSave={onSave}
+                            onRemoveParticipant={onRemoveParticipant}
                         />
                     )}
                 </>

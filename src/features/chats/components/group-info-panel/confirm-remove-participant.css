@@ -1,0 +1,71 @@
+.confirm-remove-participant__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgb(0 0 0 / 75%);
+    backdrop-filter: blur(4px);
+}
+
+.confirm-remove-participant {
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    border: 1px solid rgb(102 252 241 / 50%);
+    border-radius: 12px;
+    background: #0b0c10;
+    color: #c5c6c7;
+    box-shadow: 0 0 30px rgb(102 252 241 / 10%);
+}
+
+.confirm-remove-participant h2 {
+    margin: 0 0 16px;
+    color: #66fcf1;
+    font-size: 17px;
+}
+
+.confirm-remove-participant p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.confirm-remove-participant strong {
+    color: #fff;
+}
+
+.confirm-remove-participant__error {
+    color: #ff7777;
+}
+
+.confirm-remove-participant__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-remove-participant__actions button {
+    padding: 8px 14px;
+    border: 1px solid #66fcf1;
+    border-radius: 6px;
+    background: transparent;
+    color: #66fcf1;
+    cursor: pointer;
+}
+
+.confirm-remove-participant__actions button:last-child {
+    border-color: #ff7777;
+    background: #4a2028;
+    color: #ff7777;
+}
+
+.confirm-remove-participant__actions button:last-child:hover:not(:disabled) {
+    background: #672b35;
+}
+
+.confirm-remove-participant__actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

@@ -12,7 +12,7 @@ import { useState } from "react";
 function ChatWindow() {
     const { id } = useParams();
     const chatId = Number(id);
-    const { chat, notification, loading, updateChatInfo } = useChat(chatId);
+    const { chat, notification, loading, updateChatInfo, removeParticipant } = useChat(chatId);
     const {
         messages,
         isFetchingMore,
@@ -46,8 +46,14 @@ function ChatWindow() {
 
     return (
         <div className="flex h-135 min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
-            {<ChatInfo chatId={chatId} type={chat.type} participants={chat.participants} name={chat.name} description={chat.description}
+            {<ChatInfo
+                chatId={chatId}
+                type={chat.type}
+                participants={chat.participants}
+                name={chat.name}
+                description={chat.description}
                 onSave={updateChatInfo}
+                onRemoveParticipant={removeParticipant}
             />}
             {<Messages
                 messages={messages}
