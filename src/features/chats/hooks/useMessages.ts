@@ -1,6 +1,7 @@
 import type { Message } from "../entities/chat.entity";
 import { useEffect, useState } from "react";
 import { getMessages, updateMessage, deleteMessage } from "../services/chat.service";
+import { updateMessageStatus } from "../services/chat.service";
 
 
 export function useMessages(chatId: number) {
@@ -14,11 +15,26 @@ export function useMessages(chatId: number) {
             setHasMore(true);
             const initial = await getMessages(chatId);
             setMessages(initial.data);
+            for (const message of initial.data) {
+                if (message.status !== "VIEW") {
+                    try {
+                        await updateMessageStatus(
+                            chatId,
+                            message.id,
+                            "VIEW"
+                        );
+                    } catch (error) {
+                        console.error(
+                            "Error al actualizar el estado del mensaje:",
+                            error
+                        );
+                    }
+                }
+            }
             if (initial.data.length < 30) {
                 setHasMore(false)
             }
         }
-
         loadInitial();
     }, [chatId]);
 
@@ -38,6 +54,19 @@ export function useMessages(chatId: number) {
 
     const addMessage = (message: Message) => {
         setMessages(prev => [...prev, message]);
+    };
+
+    const updateStatus = (
+        messageId: number,
+        status: Message["status"]
+    ) => {
+        setMessages(prev =>
+            prev.map(message =>
+                message.id === messageId
+                    ? { ...message, status }
+                    : message
+            )
+        );
     };
 
     const removeMessage = async (messageId: number) => {
@@ -74,6 +103,7 @@ export function useMessages(chatId: number) {
         hasMore,
         addMessage,
         removeMessage,
-        editMessage
+        editMessage,
+        updateStatus,
     }
 }

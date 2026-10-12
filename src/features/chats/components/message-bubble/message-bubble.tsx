@@ -1,11 +1,13 @@
 import { useUser } from "@features/users/hooks/useUser";
 import { useState, useEffect } from "react";
-import "./message-bubble.css"
+import type { StatusType } from "@features/chats/entities/chat.entity";
+import "./message-bubble.css";
 
 type Props = {
     id: number;
     senderId: number;
     content: string;
+    status: StatusType;
     createAt: string;
     updatedAt: string;
     onDelete: (messageId: number) => void;
@@ -16,6 +18,7 @@ export function MessageBuble({
     id,
     senderId,
     content,
+    status,
     createAt,
     updatedAt,
     onDelete,
@@ -35,7 +38,7 @@ export function MessageBuble({
 
     const clasStyle = senderId === currentId ? currentUser : otherUser;
     const isCurrentUser = senderId === currentId;
-
+    // console.log("currentID: ", isCurrentUser, senderId, currentId)
     const handleEdit = async () => {
         if (!editedContent.trim()) return;
 
@@ -145,6 +148,17 @@ export function MessageBuble({
             <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">
                 {isEdited && <span>Editado · </span>}
                 {messageTime}
+                {isCurrentUser && (
+                    <span
+                        className={`inline-block text-base font-black leading-none ${status === "VIEW" ? "text-blue-500" : "text-gray-500"
+                            }`}
+                        style={{ WebkitTextStroke: "0.5px currentColor" }}
+                        title={status}
+                        aria-label={`Estado: ${status}`}
+                    >
+                        {status === "SEND" ? "✓" : "✓✓"}
+                    </span>
+                )}
             </div>
         </div>
     )

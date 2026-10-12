@@ -1,6 +1,14 @@
-.messages-container {
-    background-color: #151a1f;
+.messagesContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    min-height: 0;
+    width: 100%;
+    gap: 0.5rem;
+    overflow-y: auto;
+    padding-inline: 1rem;
 
+    background-color: #151a1f;
     background-image:
         repeating-linear-gradient(0deg,
             rgba(255, 255, 255, 0.012) 0px,
@@ -29,17 +37,16 @@
         64px 64px;
 }
 
-.message-error {
+.messageError {
     display: flex;
     align-items: center;
     gap: 6px;
-
     color: #ffb400;
     font-size: 11px;
     font-family: monospace;
 }
 
-.message-error svg {
+.messageError svg {
     width: 16px;
     height: 16px;
     flex-shrink: 0;

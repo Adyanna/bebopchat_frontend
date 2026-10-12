@@ -18,6 +18,7 @@ export interface GetChatsResponse {
 
 export type ChatType = "INDIVIDUAL" | "GROUP";
 export type MessageType = "TEXT" | "AUDIO" | "VIDEO" | "IMAGE";
+export type StatusType = "SEND" | "RECIBE" | "VIEW";
 
 export type ChatParticipant = {
     userId: number;
@@ -60,6 +61,7 @@ export type Message = {
     updatedAt: string;
     content: string;
     type: MessageType;
+    status: StatusType;
     chatId: number;
     senderId: number
 }

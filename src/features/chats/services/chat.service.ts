@@ -152,3 +152,39 @@ export async function updateMessage(
 
     return data;
 }
+
+
+
+export async function updateMessageStatus(
+    chatId: number,
+    messageId: number,
+    status: "SEND" | "RECIBE" | "VIEW"
+): Promise<Message> {
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/messages/${messageId}/status`,
+        {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status }),
+        }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            data.errors?.join("\n") ||
+            data.message ||
+            "Error al actualizar el estado del mensaje"
+        );
+    }
+
+    return data;
+}

@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import { MessageBuble } from "../message-bubble/message-bubble";
 import type { Message } from "@features/chats/entities/chat.entity";
-import "./message.css"
-
+// import "./message.css"
+import styles from "./message.module.css";
 
 type Props = {
     messages: Message[];
@@ -27,15 +27,13 @@ export const Messages = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
 
+
+
     useEffect(() => {
         const element = containerRef.current;
-
         if (!element || messages.length === 0) return;
 
-        if (isInitialLoad.current) {
-            element.scrollTop = element.scrollHeight;
-            isInitialLoad.current = false;
-        }
+        element.scrollTop = element.scrollHeight;
     }, [messages]);
 
     const handleScroll = () => {
@@ -47,7 +45,7 @@ export const Messages = ({
     }
 
     return (
-        <div ref={containerRef} onScroll={handleScroll} className="messages-container flex-1 overflow-y-auto flex flex-col gap-2 !px-4">
+        <div ref={containerRef} onScroll={handleScroll} className={styles.messagesContainer}>
             {isFetchingMore &&
                 <span className="text-center p-2">Cargando...</span>}
             {messages.map((message) => (
@@ -56,12 +54,13 @@ export const Messages = ({
                     key={message.id}
                     senderId={message.senderId}
                     content={message.content}
+                    status={message.status}
                     createAt={message.createAt}
                     updatedAt={message.updatedAt}
                     onDelete={removeMessage}
                     onEdit={editMessage}
                 />))}
-            {messageError && <div className="message-error">
+            {messageError && <div className={styles.messageError}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
