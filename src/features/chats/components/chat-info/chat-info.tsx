@@ -12,7 +12,8 @@ type Props = {
 
 export const ChatInfo = ({ type, participants, name }: Props) => {
     const { userData } = useUser();
-    console.log("USER CONTEXT:", userData);
+    // console.log("USER CONTEXT:", userData);
+    //REVISAR POR QUE CONSUME 8 VECES EL SERVICIO
     const currentUserId = userData?.id;
     const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
 
