@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getChat } from "../services/chat.service";
+import { getChat, updateChat } from "../services/chat.service";
 import { type Chat } from "../entities/chat.entity";
 
 export const useChat = (chatId: number) => {
@@ -27,9 +27,27 @@ export const useChat = (chatId: number) => {
         loadChat();
     }, [chatId]);
 
+    const updateChatInfo = async (name: string, description: string,): Promise<void> => {
+        const updatedChat = await updateChat(chatId, {
+            name,
+            description,
+        });
+
+        setChat((currentChat) =>
+            currentChat
+                ? {
+                    ...currentChat,
+                    name: updatedChat.name,
+                    description: updatedChat.description,
+                }
+                : currentChat,
+        );
+    };
+
     return {
         chat,
         notification,
         loading,
+        updateChatInfo,
     };
 };

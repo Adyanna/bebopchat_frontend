@@ -1,0 +1,311 @@
+/* Panel principal */
+.group-info-panel {
+    position: absolute;
+    z-index: 20;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: min(75vh, 620px);
+    overflow-y: auto;
+    padding: 16px 18px;
+    color: #c5c6c7;
+    background: #0b0c10;
+    border: 1px solid rgb(102 252 241 / 25%);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 35%);
+}
+
+/* Cabecera */
+.group-info-panel__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #334155;
+}
+
+.group-info-panel__avatar,
+.group-info-panel__participant-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #66fcf1;
+    background: #1f2833;
+    border-radius: 50%;
+}
+
+.group-info-panel__avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 25px;
+}
+
+.group-info-panel__identity {
+    flex: 1;
+    min-width: 0;
+}
+
+.group-info-panel__identity h2 {
+    margin: 0;
+    color: #66fcf1;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.group-info-panel__identity span,
+.group-info-panel__count {
+    color: #aab2bf;
+    font-size: 12px;
+}
+
+/* Botones de cabecera y participantes */
+.group-info-panel__close,
+.group-info-panel__edit,
+.group-info-panel__participant-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.group-info-panel__close {
+    color: #c5c6c7;
+    font-size: 24px;
+}
+
+.group-info-panel__edit {
+    color: #66fcf1;
+    font-size: 22px;
+}
+
+/* Secciones */
+.group-info-panel__section {
+    padding: 22px 0;
+    border-bottom: 1px solid #334155;
+}
+
+.group-info-panel__section:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.group-info-panel__section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.group-info-panel__section-heading h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Título de información del grupo */
+.group-info-panel__section:nth-of-type(2) .group-info-panel__section-heading h3 {
+    color: #66fcf1;
+}
+
+/* Campos en modo consulta y edición */
+.group-info-panel__field {
+    display: block;
+    margin-bottom: 18px;
+}
+
+.group-info-panel__field:last-child {
+    margin-bottom: 0;
+}
+
+.group-info-panel__field>span {
+    display: block;
+    margin-bottom: 8px;
+    color: #aab2bf;
+    font-size: 11px;
+}
+
+.group-info-panel__field p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+/* Formulario de edición */
+.group-info-panel__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.group-info-panel__field input,
+.group-info-panel__field textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 12px;
+    color: #c5c6c7;
+    background: #111820;
+    border: 1px solid #374653;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+}
+
+.group-info-panel__field textarea {
+    min-height: 85px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.group-info-panel__field input:hover,
+.group-info-panel__field textarea:hover {
+    border-color: #52717d;
+}
+
+.group-info-panel__field input:focus,
+.group-info-panel__field textarea:focus {
+    background: #131e27;
+    border-color: #66fcf1;
+    box-shadow: 0 0 0 2px rgb(102 252 241 / 12%);
+}
+
+.group-info-panel__field input:disabled,
+.group-info-panel__field textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Botones Guardar y Cancelar */
+.group-info-panel__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.group-info-panel__actions button {
+    padding: 9px 16px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        color 180ms ease;
+}
+
+/* Cancelar */
+.group-info-panel__actions button:first-child {
+    color: #c5c6c7;
+    background: #1f2833;
+    border-color: #374653;
+}
+
+.group-info-panel__actions button:first-child:hover {
+    color: #ffffff;
+    background: #293541;
+    border-color: #667784;
+}
+
+/* Guardar */
+.group-info-panel__actions button:last-child {
+    color: #0b0c10;
+    background: #66fcf1;
+    border-color: #66fcf1;
+}
+
+.group-info-panel__actions button:last-child:hover {
+    background: #a0fff8;
+    border-color: #a0fff8;
+    box-shadow: 0 0 12px rgb(102 252 241 / 20%);
+}
+
+/* Estados de botones */
+.group-info-panel button:hover {
+    color: #66fcf1;
+}
+
+.group-info-panel__actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.group-info-panel button:focus-visible {
+    outline: 2px solid #66fcf1;
+    outline-offset: 3px;
+}
+
+/* Mensajes de error */
+.group-info-panel__error {
+    margin: 0;
+    padding: 10px 12px;
+    color: #ff8d9b;
+    background: rgb(255 70 100 / 8%);
+    border: 1px solid rgb(255 70 100 / 35%);
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+/* Lista de participantes */
+.group-info-panel__participants {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.group-info-panel__participant {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.group-info-panel__participant-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+}
+
+.group-info-panel__participant-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    font-size: 12px;
+}
+
+.group-info-panel__participant-info span:first-child {
+    color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.group-info-panel__participant-info span:last-child {
+    color: #aab2bf;
+    font-size: 11px;
+}
+
+.group-info-panel__participant-menu {
+    color: #c5c6c7;
+    font-size: 22px;
+}

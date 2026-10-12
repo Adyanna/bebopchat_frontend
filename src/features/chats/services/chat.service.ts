@@ -152,3 +152,59 @@ export async function updateMessage(
 
     return data;
 }
+
+export async function updateChat(
+    chatId: number,
+    changes: {
+        name?: string;
+        description?: string;
+    }
+): Promise<Chat> {
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    const response = await fetch(`${url}/${chatId}`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(changes),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            data.errors?.join("\n") ||
+            data.message ||
+            "Error al actualizar el grupo"
+        );
+    }
+
+    return data;
+}
+
+export const removeChatParticipant = async (
+    chatId: number,
+    userId: number,
+): Promise<void> => {
+    const token =
+        localStorage.getItem("token") ??
+        sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/participants/${userId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        },
+    );
+
+    if (!response.ok) {
+        throw new Error("No se pudo eliminar al participante");
+    }
+};
