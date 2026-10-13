@@ -38,7 +38,7 @@ export const ChatListBody = ({
             <div className={style.avatarContainer}>
               <img
                 src={defaultAvatar}
-                alt={chat.name}
+                alt={chat.name ?? ""}
                 className={style.avatarImage}
               />
             </div>
