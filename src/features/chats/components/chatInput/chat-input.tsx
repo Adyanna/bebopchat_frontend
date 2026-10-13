@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FilePicker } from "../file-picker/file-picker";
 import "./chat-input.css";
 import type { FileType } from "@core/types/core-types";
+import { AudioRecorder } from "../audio-recorder/audio-recorder";
 
 type Props = {
     onSend: (content: string, file?: File, tipo?: FileType) => void;
@@ -31,6 +32,10 @@ export function ChatInput({ onSend }: Props) {
 
     function handleFileSelected(file: File) {
         setSelectedFile(file);
+    }
+
+    function handleRecordingComplete(file: File) {
+        onSend("", file, "audio");
     }
 
     return (
@@ -110,29 +115,7 @@ export function ChatInput({ onSend }: Props) {
                     </svg>
 
                 </button>
-                <button type="button" className="chat-action-button">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        <rect
-                            x="9"
-                            y="3"
-                            width="6"
-                            height="11"
-                            rx="3"
-                        />
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"
-                        />
-                    </svg>
-                </button>
-
+                <AudioRecorder onRecordingComplete={handleRecordingComplete} />
             </form>
         </div>
     )

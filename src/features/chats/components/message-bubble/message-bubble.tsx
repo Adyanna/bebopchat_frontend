@@ -1,6 +1,6 @@
 import { useUser } from "@features/users/hooks/useUser";
 import { useState, useEffect } from "react";
-import { MessageMedia } from "../MessageMedia/message-media";
+import { MessageMedia } from "../message-media/message-media";
 import "./message-bubble.css"
 
 type Props = {
@@ -142,7 +142,7 @@ export function MessageBuble({
             ) :
                 (
                     <div className="flex flex-col gap-2">
-                        {multimediaUrl && (type === "IMAGE" || type === "VIDEO") && (
+                        {multimediaUrl && (type === "IMAGE" || type === "VIDEO" || type === "AUDIO") && (
                             <MessageMedia url={multimediaUrl} type={type} />
                         )}
 
@@ -157,7 +157,6 @@ export function MessageBuble({
                 )
             }
 
-            {/*Mejorar fecha traida del backend*/}
             <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">
                 {isEdited && <span>Editado · </span>}
                 {messageTime}

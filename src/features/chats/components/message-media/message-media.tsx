@@ -1,6 +1,6 @@
 type Props = {
     url: string;
-    type: "IMAGE" | "VIDEO";
+    type: "IMAGE" | "VIDEO" | "AUDIO";
 };
 
 export function MessageMedia({ url, type }: Props) {
@@ -11,9 +11,7 @@ export function MessageMedia({ url, type }: Props) {
 
     if (type === "IMAGE") {
         return (
-            <img
-                src={mediaUrl}
-                alt="Imagen enviada"
+            <img src={mediaUrl} alt="Imagen enviada"
                 className="max-h-80 max-w-full rounded-lg object-contain"
             />
         );
@@ -21,12 +19,18 @@ export function MessageMedia({ url, type }: Props) {
 
     if (type === "VIDEO") {
         return (
-            <video
-                src={mediaUrl}
-                controls
+            <video src={mediaUrl} controls
                 className="max-h-80 max-w-full rounded-lg"
             />
         );
+    }
+
+    if (type === "AUDIO") {
+        return (
+            <div className="message-audio">
+                <audio src={mediaUrl} controls preload="metadata" />
+            </div>
+        )
     }
 
     return null;

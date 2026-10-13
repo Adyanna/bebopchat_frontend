@@ -32,7 +32,7 @@ function ChatWindow() {
 
 
     return (
-        <div className="flex h-135 min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
+        <div className="flex h-[calc(100vh-180px)] min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
             {<ChatInfo
                 chatId={chatId}
                 type={chat.type}
