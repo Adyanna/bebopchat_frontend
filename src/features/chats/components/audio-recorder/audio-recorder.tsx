@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import "./audio-recorder.css"
 
 type Props = {
     onRecordingComplete: (file: File) => void;
@@ -68,30 +69,47 @@ export function AudioRecorder({ onRecordingComplete }: Props) {
     }
 
     return (
-        <div className="audio-recorder">
-            <button type="button" className="chat-action-button" onClick={isRecording ? stopRecording : startRecording}
-                aria-label={isRecording ? "Detener grabacion" : "Grabar audio"}>
+        <div className={`audio-recorder ${isRecording ? "is-recording" : ""}`}>
+            <div className="audio-recorder__visual">
+                {isRecording && (
+                    <div className="audio-recorder__waves" aria-hidden="true">
+                        <span />
+                        <span />
+                        <span />
+                        <span />
+                        <span />
+                    </div>
+                )}
 
-                {isRecording ?
-                    "■" :
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        <rect x="9" y="3" width="6" height="11" rx="3" />
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                            d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"
-                        />
-                    </svg>
-                }
-            </button>
+                <button
+                    type="button"
+                    className="chat-action-button audio-recorder__button"
+                    onClick={isRecording ? stopRecording : startRecording}
+                    aria-label={isRecording ? "Detener grabación" : "Grabar audio"}
+                >
+                    {isRecording ? (
+                        "■"
+                    ) : (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                        >
+                            <rect x="9" y="3" width="6" height="11" rx="3" />
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"
+                            />
+                        </svg>
+                    )}
+                </button>
+            </div>
 
-            {isRecording && <span>Grabando…</span>}
             {error && <span role="alert">{error}</span>}
+        </div >
 
-        </div>
-    )
+    );
 }

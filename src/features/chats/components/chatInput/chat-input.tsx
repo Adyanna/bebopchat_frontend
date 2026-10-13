@@ -86,35 +86,11 @@ export function ChatInput({ onSend }: Props) {
                         stroke="currentColor"
                         strokeWidth="2"
                     >
-
-                        <path strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M22 2 11 13"
-                        />
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m22 2-7 20-4-9-9-4 20-7Z"
-                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M22 2 11 13" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m22 2-7 20-4-9-9-4 20-7Z" />
                     </svg>
                 </button>
-                <button type="button" className="chat-action-button">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"
-                        />
-                        <circle cx="12" cy="13" r="3" />
-                    </svg>
 
-                </button>
                 <AudioRecorder onRecordingComplete={handleRecordingComplete} />
             </form>
         </div>
