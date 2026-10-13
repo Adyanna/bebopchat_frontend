@@ -60,6 +60,7 @@ export type Message = {
     updatedAt: string;
     content: string;
     type: MessageType;
+    multimediaUrl: string | null
     chatId: number;
     senderId: number
 }

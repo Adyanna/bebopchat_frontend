@@ -1,96 +1,139 @@
 import React, { useState } from "react";
+import { FilePicker } from "../file-picker/file-picker";
 import "./chat-input.css";
+import type { FileType } from "@core/types/core-types";
 
 type Props = {
-    onSend: (content: string) => void;
+    onSend: (content: string, file?: File, tipo?: FileType) => void;
 }
 
 export function ChatInput({ onSend }: Props) {
     const [message, setMessage] = useState("");
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-        if (!message.trim()) return;
+        const content = message.trim();
 
-        onSend(message.trim());
+        if (!content && !selectedFile) return;
+
+        const tipo: FileType | undefined = selectedFile
+            ? selectedFile.type.startsWith("image/")
+                ? "photos"
+                : "multimedia"
+            : undefined;
+        onSend(content, selectedFile ?? undefined, tipo);
 
         setMessage("");
+        setSelectedFile(null);
 
     }
 
+    function handleFileSelected(file: File) {
+        setSelectedFile(file);
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="chat-input">
-            <button type="button" className="chat-action-button" aria-label="Más">
-                +
-            </button>
+        <div className="chat-input-container">
+            {selectedFile && (
+                <div className="chat-selected-file">
+                    <div className="chat-selected-file__icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <rect x="3" y="3" width="18" height="18" rx="3" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <path d="m21 15-5-5L5 21" />
+                        </svg>
+                    </div>
+                    <span className="chat-selected-file__name">{selectedFile.name}</span>
+                    <button
+                        type="button"
+                        className="chat-selected-file__remove"
+                        onClick={() => setSelectedFile(null)}
+                        aria-label="Quitar archivo seleccionado"
+                    >
+                        ×
+                    </button>
+                </div>
+            )}
+            <form onSubmit={handleSubmit} className="chat-input">
+                <FilePicker onFileSelected={handleFileSelected} />
 
-            <input value={message}
-                onChange={(event) => setMessage(event.target.value)}
-                type="text"
-                className="message-input"
-                placeholder="Escribe un mensaje..."
-            />
+                <input value={message}
+                    onChange={(event) => setMessage(event.target.value)}
+                    type="text"
+                    className="message-input"
+                    placeholder="Escribe un mensaje..."
+                />
 
-            <button className="send-button" type="submit">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                >
+                <button className="send-button" type="submit">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
 
-                    <path strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M22 2 11 13"
-                    />
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m22 2-7 20-4-9-9-4 20-7Z"
-                    />
-                </svg>
-            </button>
-            <button className="chat-action-button">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"
-                    />
-                    <circle cx="12" cy="13" r="3" />
-                </svg>
+                        <path strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M22 2 11 13"
+                        />
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m22 2-7 20-4-9-9-4 20-7Z"
+                        />
+                    </svg>
+                </button>
+                <button type="button" className="chat-action-button">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"
+                        />
+                        <circle cx="12" cy="13" r="3" />
+                    </svg>
 
-            </button>
-            <button className="chat-action-button">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                >
-                    <rect
-                        x="9"
-                        y="3"
-                        width="6"
-                        height="11"
-                        rx="3"
-                    />
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"
-                    />
-                </svg>
-            </button>
+                </button>
+                <button type="button" className="chat-action-button">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
+                        <rect
+                            x="9"
+                            y="3"
+                            width="6"
+                            height="11"
+                            rx="3"
+                        />
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"
+                        />
+                    </svg>
+                </button>
 
-        </form>
+            </form>
+        </div>
     )
 }

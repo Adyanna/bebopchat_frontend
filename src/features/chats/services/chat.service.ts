@@ -60,7 +60,11 @@ export async function getMessages(chatId: number, before?: number): Promise<Mess
     return data;
 }
 
-export async function createMessage(chatId: number, content: string): Promise<Message> {
+export async function createMessage(
+    chatId: number,
+    content: string,
+    multimediaUrl?: string
+): Promise<Message> {
     const token =
         localStorage.getItem("token") ||
         sessionStorage.getItem("token");
@@ -73,6 +77,7 @@ export async function createMessage(chatId: number, content: string): Promise<Me
         },
         body: JSON.stringify({
             content,
+            multimediaUrl,
         }),
     });
 

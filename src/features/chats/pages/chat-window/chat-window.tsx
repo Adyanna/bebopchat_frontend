@@ -4,9 +4,7 @@ import { useChat } from "@features/chats/hooks/useChat";
 import { Navigate } from "react-router";
 import { Messages } from "@features/chats/components/messages/messages";
 import { ChatInput } from "@features/chats/components/chatInput/chat-input";
-import { createMessage } from "@features/chats/services/chat.service";
 import { useMessages } from "@features/chats/hooks/useMessages";
-import { useState } from "react";
 
 
 function ChatWindow() {
@@ -18,11 +16,12 @@ function ChatWindow() {
         isFetchingMore,
         fetchMore,
         hasMore,
-        addMessage,
         removeMessage,
         editMessage,
+        sendMessage,
+        error
     } = useMessages(chatId);
-    const [error, setError] = useState<string | null>(null);
+
 
     if (loading) return <p>Cargando...</p>;
     if (notification) return <p>{notification}</p>;
@@ -30,18 +29,6 @@ function ChatWindow() {
     if (!chat) {
         return <Navigate to="/not-found" replace />;
     }
-
-    const sendMessage = async (content: string) => {
-        try {
-            const response = await createMessage(chatId, content);
-
-            addMessage(response);
-            setError(null);
-        } catch (error) {
-            const errorMessage = error instanceof Error ? error.message : "Error al mandar el mensaje"
-            setError(errorMessage)
-        }
-    };
 
 
     return (

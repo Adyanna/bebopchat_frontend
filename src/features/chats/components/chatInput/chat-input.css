@@ -101,3 +101,53 @@
     font-size: 22px;
     font-weight: 300;
 }
+
+.chat-selected-file {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 8px 12px;
+    background: #0B0C10;
+    border: 1px solid rgba(102, 252, 241, 0.25);
+    border-radius: 8px;
+}
+
+.chat-selected-file__name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: #C5C6C7;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chat-selected-file__remove {
+    flex-shrink: 0;
+    color: #C5C6C7;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-selected-file__remove:hover {
+    color: #66FCF1;
+}
+
+.chat-selected-file__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    color: #66FCF1;
+}
+
+.chat-selected-file__icon svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}

@@ -118,3 +118,14 @@
     border-color: #66fcf1;
     background-color: rgb(102 252 241 / 20%);
 }
+
+
+
+.message-media-divider {
+    width: 100%;
+    height: 1px;
+    flex-shrink: 0;
+    margin: 4px 0;
+    background: currentColor;
+    opacity: 0.2;
+}

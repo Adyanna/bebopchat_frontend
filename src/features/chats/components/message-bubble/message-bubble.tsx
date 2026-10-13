@@ -1,11 +1,14 @@
 import { useUser } from "@features/users/hooks/useUser";
 import { useState, useEffect } from "react";
+import { MessageMedia } from "../MessageMedia/message-media";
 import "./message-bubble.css"
 
 type Props = {
     id: number;
     senderId: number;
     content: string;
+    type: "TEXT" | "IMAGE" | "VIDEO" | "AUDIO";
+    multimediaUrl: string | null;
     createAt: string;
     updatedAt: string;
     onDelete: (messageId: number) => void;
@@ -16,6 +19,8 @@ export function MessageBuble({
     id,
     senderId,
     content,
+    type,
+    multimediaUrl,
     createAt,
     updatedAt,
     onDelete,
@@ -83,11 +88,7 @@ export function MessageBuble({
                             stroke="currentColor"
                             strokeWidth="2"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m6 9 6 6 6-6"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                         </svg>
                     </button>
 
@@ -138,9 +139,24 @@ export function MessageBuble({
                         Guardar
                     </button>
                 </div>
-            ) : (
-                <div className="break-words">{content}</div>
-            )}
+            ) :
+                (
+                    <div className="flex flex-col gap-2">
+                        {multimediaUrl && (type === "IMAGE" || type === "VIDEO") && (
+                            <MessageMedia url={multimediaUrl} type={type} />
+                        )}
+
+                        {multimediaUrl && content && (
+                            <div className="message-media-divider" />
+                        )}
+
+                        {content && (
+                            <div className="break-words">{content}</div>
+                        )}
+                    </div>
+                )
+            }
+
             {/*Mejorar fecha traida del backend*/}
             <div className="mt-1 self-end whitespace-nowrap text-[11px] opacity-70">
                 {isEdited && <span>Editado · </span>}
