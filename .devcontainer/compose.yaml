@@ -3,11 +3,18 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-
+      target: dev
     volumes:
       - ../:/workspace:cached
-
     command: sleep infinity
-
     ports:
       - "5173:5173"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: production
+    restart: unless-stopped
+    ports:
+      - "80:80"
