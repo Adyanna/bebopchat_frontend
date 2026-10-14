@@ -1,0 +1,185 @@
+.formContainer {
+    width: 100%;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 24px;
+}
+
+.title {
+    margin: 0 0 6px;
+    color: #66fcf1;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    margin: 0 0 22px;
+    color: #8997a7;
+    font-size: 0.85rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 16px;
+}
+
+.label {
+    color: #ffad42;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    color: #c5c6c7;
+    background: #0b0c10;
+    border: 1px solid #354452;
+    border-radius: 6px;
+    outline: none;
+    font: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input,
+.textarea {
+    border-color: #66fcf1;
+    box-shadow: 0 0 0 2px rgb(102 252 241 / 10%);
+}
+
+.textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.contactsTitle {
+    margin: 22px 0 12px;
+    color: #66fcf1;
+    font-size: 0.95rem;
+}
+
+.contactsList {
+    max-height: none;
+    overflow: visible;
+}
+
+.contactOption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: #1f2833;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.contactOption {
+    background: #263440;
+    border-color: rgb(102 252 241 / 35%);
+}
+
+.checkbox {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    accent-color: #66fcf1;
+    cursor: pointer;
+}
+
+.contactName {
+    color: #c5c6c7;
+    font-size: 0.9rem;
+}
+
+.selectionCount {
+    margin: 12px 0 18px;
+    color: #8997a7;
+    font-size: 0.8rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgb(102 252 241 / 20%);
+}
+
+.cancelButton,
+.submitButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Cancelar */
+.cancelButton {
+    color: #c5c6c7;
+    background: #111923;
+    border: 1px solid #354452;
+}
+
+.cancelButton:hover {
+    color: #66fcf1;
+    background: #1f2833;
+    border-color: #66fcf1;
+}
+
+/* Crear grupo */
+.submitButton {
+    color: #0b0c10;
+    background: #66fcf1;
+    border: 1px solid #66fcf1;
+    box-shadow: 0 0 8px rgb(102 252 241 / 20%);
+}
+
+.submitButton:hover {
+    background: #8afff7;
+    box-shadow: 0 0 14px rgb(102 252 241 / 35%);
+}
+
+.submitButton:active {
+    transform: translateY(1px);
+}
+
+/* Estado deshabilitado: visual, sin cambiar el cursor */
+.submitButton:disabled {
+    opacity: 0.5;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.cancelButton:focus-visible,
+.submitButton:focus-visible {
+    outline: 2px solid #ffad42;
+    outline-offset: 3px;
+}
+
+.error {
+    margin-top: 12px;
+    color: #ff7777;
+    font-size: 0.85rem;
+}

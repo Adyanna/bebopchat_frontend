@@ -1,0 +1,43 @@
+.create-chat__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    border: 1px solid rgb(102 252 241 / 30%);
+    border-radius: 5px;
+    background: #111923;
+    color: #66fcf1;
+
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.create-chat__button svg {
+    width: 100%;
+    height: 100%;
+}
+
+.create-chat__button:hover {
+    background: rgb(102 252 241 / 10%);
+    border-color: #66fcf1;
+    box-shadow: 0 0 9px rgb(102 252 241 / 15%);
+}
+
+/* Acento naranja para el menú */
+.create-chat__button:last-child {
+    color: #ffad42;
+    border-color: rgb(255 173 66 / 25%);
+}
+
+.create-chat__button:last-child:hover {
+    background: rgb(255 173 66 / 9%);
+    border-color: #ffad42;
+    box-shadow: 0 0 9px rgb(255 173 66 / 15%);
+}

@@ -6,8 +6,8 @@ export interface Participant {
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     participantIds: number[];
 }
 
@@ -71,4 +71,11 @@ export type MessageResponse = {
     meta: {
         limit: number
     }
+}
+
+export interface TargetUser {
+    id: number
+    fullname: string,
+    phone: string,
+    profilePicture: string | null;
 }

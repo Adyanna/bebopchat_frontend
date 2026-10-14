@@ -1,16 +1,16 @@
-import style from "./chat-list-footer.module.css";
+import "./chat-list-footer.css";
 
-interface ChatListFooterProps {
-    onNewChat?: () => void;
+interface ContactListFooterProps {
+    onNewGroupChat: () => void;
 }
 
-export const ChatListFooter = ({ onNewChat }: ChatListFooterProps) => {
+export const ChatListFooter = ({ onNewGroupChat }: ContactListFooterProps) => {
     return (
-        <div className={style.footerContainer}>
+        <div className="footerContainer">
             <button
                 type="button"
-                className={style.floatingButton}
-                onClick={onNewChat}
+                className="floatingButton"
+                onClick={onNewGroupChat}
                 title="Nuevo Chat"
             >
                 +
