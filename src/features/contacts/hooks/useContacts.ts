@@ -55,13 +55,33 @@ export function useContacs() {
         }
     };
 
+    const deleteContact = async (userContactId: number) => {
+        try {
+            await contactService.deleteContact(userContactId);
+
+            setContacts((prev) =>
+                prev.filter(
+                    (contact) => contact.userContactId !== userContactId
+                )
+            );
+        } catch (error) {
+            const errorMessage =
+                error instanceof Error
+                    ? error.message
+                    : 'No se pudo eliminar el contacto';
+
+            throw new Error(errorMessage);
+        }
+    };
+
     return {
         contacts,
         isFetchingMore,
         hasMore,
         fetchMore,
         error,
-        isLoading
+        isLoading,
+        deleteContact,
     }
 
 }

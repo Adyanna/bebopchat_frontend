@@ -62,6 +62,7 @@ export type Message = {
     content: string;
     type: MessageType;
     status: StatusType;
+    multimediaUrl: string | null
     chatId: number;
     senderId: number
 }

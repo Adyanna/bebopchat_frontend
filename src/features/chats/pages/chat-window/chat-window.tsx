@@ -3,7 +3,6 @@ import { ChatInfo } from "@features/chats/components/chat-info/chat-info";
 import { useChat } from "@features/chats/hooks/useChat";
 import { Messages } from "@features/chats/components/messages/messages";
 import { ChatInput } from "@features/chats/components/chatInput/chat-input";
-import { createMessage } from "@features/chats/services/chat.service";
 import { useMessages } from "@features/chats/hooks/useMessages";
 import { useState, useEffect } from "react";
 import { socket } from "@core/socket/socket";
@@ -19,11 +18,13 @@ type ChatPageContext = {
 function ChatWindow() {
     const { id } = useParams();
     const chatId = Number(id);
-    const { chat, notification, loading, } = useChat(chatId);
-    const { messages, isFetchingMore, fetchMore,
-        hasMore, addMessage, removeMessage, editMessage, updateStatus } = useMessages(chatId);
-    const [error, setError] = useState<string | null>(null);
+    // const { chat, notification, loading, } = useChat(chatId);
+    const { chat, notification, loading, updateChatInfo, removeParticipant } = useChat(chatId);
+
+    // const [error, setError] = useState<string | null>(null);
     const { refreshChatList } = useOutletContext<ChatPageContext>();
+    const { messages, isFetchingMore, fetchMore, hasMore, addMessage, removeMessage, editMessage, updateStatus, sendMessage, error } = useMessages(chatId, refreshChatList);
+
     // RECIBIR MENSAJES EN EL CHATWINDOW DEL RECEPTOR.
     // Si el receptor está conectado, actualiza el estado a RECIBE.
     // Si tiene abierto el chat donde llega el mensaje, lo muestra y actualiza su estado a VIEW.
@@ -113,24 +114,19 @@ function ChatWindow() {
         return <Navigate to="/not-found" replace />;
     }
 
-    const sendMessage = async (content: string) => {
-        try {
-            const response = await createMessage(chatId, content);
-            refreshChatList();
-            addMessage(response);
-            setError(null);
-        } catch (error) {
-            const errorMessage = error instanceof Error ? error.message : "Error al mandar el mensaje"
-            setError(errorMessage)
-        }
-    };
-
-
     return (
         <div className="flex h-full min-h-0 flex-col border border-cyan-400/30 bg-[#0B0C10]">
             {
                 <div className="shrink-0">
-                    <ChatInfo type={chat.type} participants={chat.participants} name={chat.name} />
+                    <ChatInfo
+                        chatId={chatId}
+                        type={chat.type}
+                        participants={chat.participants}
+                        name={chat.name}
+                        description={chat.description}
+                        onSave={updateChatInfo}
+                        onRemoveParticipant={removeParticipant}
+                    />
                 </div>
             }
             {<Messages

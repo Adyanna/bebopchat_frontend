@@ -29,12 +29,38 @@ export const Messages = ({
 
 
 
+    // useEffect(() => {
+    //     const element = containerRef.current;
+    //     if (!element || messages.length === 0) return;
+
+    //     element.scrollTop = element.scrollHeight;
+    // }, [messages]);
+
     useEffect(() => {
         const element = containerRef.current;
         if (!element || messages.length === 0) return;
 
-        element.scrollTop = element.scrollHeight;
+        const scrollToBottom = () => {
+            element.scrollTop = element.scrollHeight;
+        };
+
+        scrollToBottom();
+
+        const images = element.querySelectorAll("img");
+
+        images.forEach((image) => {
+            if (!image.complete) {
+                image.addEventListener("load", scrollToBottom, { once: true });
+            }
+        });
+
+        return () => {
+            images.forEach((image) => {
+                image.removeEventListener("load", scrollToBottom);
+            });
+        };
     }, [messages]);
+
 
     const handleScroll = () => {
         const element = containerRef.current;
@@ -55,6 +81,8 @@ export const Messages = ({
                     senderId={message.senderId}
                     content={message.content}
                     status={message.status}
+                    type={message.type}
+                    multimediaUrl={message.multimediaUrl}
                     createAt={message.createAt}
                     updatedAt={message.updatedAt}
                     onDelete={removeMessage}
