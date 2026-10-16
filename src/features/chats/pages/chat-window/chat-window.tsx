@@ -4,7 +4,7 @@ import { useChat } from "@features/chats/hooks/useChat";
 import { Messages } from "@features/chats/components/messages/messages";
 import { ChatInput } from "@features/chats/components/chatInput/chat-input";
 import { useMessages } from "@features/chats/hooks/useMessages";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { socket } from "@core/socket/socket";
 import { updateMessageStatus } from "@features/chats/services/chat.service";
 import type { StatusType } from "@features/chats/entities/chat.entity";

@@ -53,7 +53,7 @@ export const ChatList = ({ refreshChats }: Props) => {
 
     useEffect(() => {
         const handleReceiveMessage = async (message: { chatId: number }) => {
-
+            console.log(message)
             try {
                 const response = await chatService.getMyChats();
                 setChats(response.data || []);

@@ -25,7 +25,7 @@ export const Messages = ({
 }: Props) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const isInitialLoad = useRef(true);
+    // const isInitialLoad = useRef(true);
 
 
 
