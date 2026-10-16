@@ -2,6 +2,8 @@ import type { ChatParticipant, ChatType } from "@features/chats/entities/chat.en
 import { useUser } from "@features/users/hooks/useUser";
 import { useState } from "react";
 import { GroupInfoPanel } from "../group-info-panel/group-info-panel";
+import { AddParticipantsButton } from "../add-participants-button/add-participants-button";
+import { AddParticipantsModal } from "../add-participants-modal/add-participants-modal";
 import "./chat-info.css"
 
 
@@ -13,10 +15,11 @@ type Props = {
     description: string | null;
     onSave: (name: string, description: string) => Promise<void>;
     onRemoveParticipant: (userId: number) => Promise<void>;
+    onAddParticipants: (chatId: number, participantIds: number[]) => Promise<void>
 }
 
 
-export const ChatInfo = ({ type, participants, name, description, onSave, onRemoveParticipant }: Props) => {
+export const ChatInfo = ({ chatId, type, participants, name, description, onSave, onRemoveParticipant, onAddParticipants }: Props) => {
     const { userData } = useUser();
     // console.log("USER CONTEXT:", userData);
     //REVISAR POR QUE CONSUME 8 VECES EL SERVICIO
@@ -24,10 +27,13 @@ export const ChatInfo = ({ type, participants, name, description, onSave, onRemo
     const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
 
     const [isGroupInfoOpen, setIsGroupInfoOpen] = useState(false);
+    const [isAddParticipantsOpen, setIsAddParticipantsOpen] = useState(false);
 
     const otherParticipant = participants.find(
         participant => participant.userId !== currentUserId
     );
+
+    const isAdmin = participants.some((participant) => participant.userId === currentUserId && participant.role === "ADMIN");
     const displayName = type === "GROUP" ? name ?? "Grupo" : otherParticipant?.fullname ?? "Usuario";
 
     return (
@@ -72,30 +78,44 @@ export const ChatInfo = ({ type, participants, name, description, onSave, onRemo
 
             {type === "GROUP" && (
                 <>
-                    <button
-                        type="button"
-                        className={`group-info-tab ${isGroupInfoOpen ? "is-open" : ""
-                            }`}
-                        onClick={() => setIsGroupInfoOpen((open) => !open)}
-                        aria-expanded={isGroupInfoOpen}
-                        aria-label="Mostrar información del grupo"
-                    >
-                        <span>Info del grupo</span>
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            aria-hidden="true"
+                    <div className="group-actions">
+                        <button
+                            type="button"
+                            className={`group-info-tab ${isGroupInfoOpen ? "is-open" : ""
+                                }`}
+                            onClick={() => setIsGroupInfoOpen((open) => !open)}
+                            aria-expanded={isGroupInfoOpen}
+                            aria-label="Mostrar información del grupo"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m6 9 6 6 6-6"
-                            />
-                        </svg>
-                    </button>
+                            <span>Info del grupo</span>
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="m6 9 6 6 6-6"
+                                />
+                            </svg>
+                        </button>
+
+                        {isAdmin && (<AddParticipantsButton onClick={() => setIsAddParticipantsOpen(true)} />)}
+                    </div>
+
+                    {isAddParticipantsOpen && (
+                        <AddParticipantsModal
+                            chatId={chatId}
+                            participants={participants}
+                            onClose={() => setIsAddParticipantsOpen(false)}
+                            onParticipantsAdded={onAddParticipants} />
+                    )}
+
+
 
                     {isGroupInfoOpen && currentUserId != null && (
                         <GroupInfoPanel

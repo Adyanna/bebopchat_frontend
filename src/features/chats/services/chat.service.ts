@@ -249,3 +249,36 @@ export const removeChatParticipant = async (
         throw new Error("No se pudo eliminar al participante");
     }
 };
+
+
+export const addParticipantsService = async (
+    chatId: number,
+    participantIds: number[],
+): Promise<Chat> => {
+    const token = localStorage.getItem("token") ?? sessionStorage.getItem("token");
+
+    const response = await fetch(
+        `${url}/${chatId}/participants/`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userContactIds: participantIds
+            }),
+        }
+
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.errors?.join("\n") || data.message ||
+            "Error al añadir participantes"
+        );
+    }
+
+    return data;
+};
