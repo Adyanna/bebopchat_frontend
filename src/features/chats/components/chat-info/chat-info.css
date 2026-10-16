@@ -101,3 +101,50 @@
     width: 25px;
     height: 25px;
 }
+
+.chat-info-wrapper {
+    position: relative;
+    border-bottom: 1px solid rgb(102 252 241 / 20%);
+}
+
+.group-info-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    color: #66fcf1;
+    background: #1f2833;
+    border: 1px solid rgb(102 252 241 / 35%);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.group-info-tab:hover,
+.group-info-tab.is-open {
+    background: #263746;
+    box-shadow: 0 0 12px rgb(102 252 241 / 18%);
+}
+
+.group-info-tab svg {
+    width: 15px;
+    height: 15px;
+    transition: transform 180ms ease;
+}
+
+.group-info-tab.is-open svg {
+    transform: rotate(180deg);
+}
+
+.group-info-panel {
+    padding: 20px;
+    color: #c5c6c7;
+    background: #0b0c10;
+    border: 1px solid rgb(102 252 241 / 35%);
+    border-radius: 8px;
+    margin: 0 12px 12px;
+}

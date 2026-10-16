@@ -1,0 +1,91 @@
+.audio-recorder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.audio-recorder__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+}
+
+.audio-recorder__button {
+    position: relative;
+    z-index: 1;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.audio-recorder.is-recording .audio-recorder__button {
+    transform: translateY(-4px);
+    box-shadow: 0 0 12px rgba(102, 252, 241, 0.4);
+}
+
+.audio-recorder__waves {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    opacity: 0.8;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.audio-recorder__waves span {
+    width: 3px;
+    height: 10px;
+    border-radius: 4px;
+    background: #66FCF1;
+    box-shadow: 0 0 6px rgba(102, 252, 241, 0.6);
+    animation: audio-wave 700ms ease-in-out infinite alternate;
+}
+
+.audio-recorder__waves span:nth-child(2),
+.audio-recorder__waves span:nth-child(4) {
+    animation-delay: 180ms;
+}
+
+.audio-recorder__waves span:nth-child(3) {
+    animation-delay: 350ms;
+}
+
+.audio-recorder__waves span:nth-child(5) {
+    animation-delay: 100ms;
+}
+
+.audio-recorder__label {
+    color: #66FCF1;
+    font-size: 12px;
+    text-shadow: 0 0 6px rgba(102, 252, 241, 0.35);
+}
+
+@keyframes audio-wave {
+    from {
+        height: 5px;
+        opacity: 0.45;
+    }
+
+    to {
+        height: 27px;
+        opacity: 1;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .audio-recorder__waves span {
+        animation: none;
+        height: 12px;
+    }
+
+    .audio-recorder__button {
+        transition: none;
+    }
+
+}

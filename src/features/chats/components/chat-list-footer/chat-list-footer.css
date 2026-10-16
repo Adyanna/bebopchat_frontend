@@ -1,17 +1,20 @@
 .footerContainer {
     display: flex;
     justify-content: flex-end;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.5rem;
     pointer-events: none;
-    padding: 1rem;
 }
 
 .floatingButton {
     pointer-events: auto;
+    flex-shrink: 0;
+    margin-left: auto;
     width: 52px;
     height: 52px;
+    min-width: 52px;
+    min-height: 52px;
     border-radius: 50%;
     background-color: #0b0c10;
     color: #66fcf1;

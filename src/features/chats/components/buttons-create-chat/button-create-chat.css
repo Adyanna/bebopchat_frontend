@@ -1,0 +1,18 @@
+.button-create-chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    color: #66fcf1;
+    border: 1px solid #66fcf1;
+    background: #0b0c10;
+}
+
+.button-create-chat svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}

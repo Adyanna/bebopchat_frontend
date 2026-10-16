@@ -1,12 +1,17 @@
 import type { Message } from "../entities/chat.entity";
 import { useEffect, useState } from "react";
-import { getMessages, updateMessage, deleteMessage } from "../services/chat.service";
+// import { getMessages, updateMessage, deleteMessage } from "../services/chat.service";
+import { getMessages, updateMessage, deleteMessage, createMessage } from "../services/chat.service";
 
+import { updateMessageStatus } from "../services/chat.service";
+import { uploadFile } from "@core/services/upload.service";
+import { type FileType } from "@core/types/core-types";
 
-export function useMessages(chatId: number) {
+export function useMessages(chatId: number, refreshChatList: () => void) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isFetchingMore, setIsFetchingMore] = useState(false);
     const [hasMore, setHasMore] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadInitial = async () => {
@@ -14,11 +19,26 @@ export function useMessages(chatId: number) {
             setHasMore(true);
             const initial = await getMessages(chatId);
             setMessages(initial.data);
+            for (const message of initial.data) {
+                if (message.status !== "VIEW") {
+                    try {
+                        await updateMessageStatus(
+                            chatId,
+                            message.id,
+                            "VIEW"
+                        );
+                    } catch (error) {
+                        console.error(
+                            "Error al actualizar el estado del mensaje:",
+                            error
+                        );
+                    }
+                }
+            }
             if (initial.data.length < 30) {
                 setHasMore(false)
             }
         }
-
         loadInitial();
     }, [chatId]);
 
@@ -38,6 +58,19 @@ export function useMessages(chatId: number) {
 
     const addMessage = (message: Message) => {
         setMessages(prev => [...prev, message]);
+    };
+
+    const updateStatus = (
+        messageId: number,
+        status: Message["status"]
+    ) => {
+        setMessages(prev =>
+            prev.map(message =>
+                message.id === messageId
+                    ? { ...message, status }
+                    : message
+            )
+        );
     };
 
     const removeMessage = async (messageId: number) => {
@@ -67,6 +100,49 @@ export function useMessages(chatId: number) {
         );
     };
 
+    const sendMessage = async (content: string, file?: File, tipo?: FileType) => {
+        try {
+            let multimediaUrl: string | undefined;
+
+            if (file && tipo) {
+                const uploadedUrl = await uploadFile(file, tipo);
+
+                multimediaUrl = new URL(
+                    uploadedUrl,
+                    `http://${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}`,
+                ).href;
+            }
+
+            const message = await createMessage(
+                chatId,
+                content,
+                multimediaUrl,
+            );
+            setMessages(prev => [...prev, message]);
+            refreshChatList();
+            setError(null);
+        } catch (err) {
+            const errorMessage =
+                err instanceof Error
+                    ? err.message
+                    : "Error al enviar el archivo";
+
+            setError(errorMessage);
+        }
+    };
+
+    //  const sendMessage = async (content: string) => {
+    //         try {
+    //             const response = await createMessage(chatId, content);
+    //             refreshChatList();
+    //             addMessage(response);
+    //             setError(null);
+    //         } catch (error) {
+    //             const errorMessage = error instanceof Error ? error.message : "Error al mandar el mensaje"
+    //             setError(errorMessage)
+    //         }
+    //     };
+
     return {
         messages,
         fetchMore,
@@ -74,6 +150,9 @@ export function useMessages(chatId: number) {
         hasMore,
         addMessage,
         removeMessage,
-        editMessage
+        editMessage,
+        updateStatus,
+        sendMessage,
+        error
     }
 }

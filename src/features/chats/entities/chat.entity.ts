@@ -6,8 +6,8 @@ export interface Participant {
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     participantIds: number[];
 }
 
@@ -18,6 +18,7 @@ export interface GetChatsResponse {
 
 export type ChatType = "INDIVIDUAL" | "GROUP";
 export type MessageType = "TEXT" | "AUDIO" | "VIDEO" | "IMAGE";
+export type StatusType = "SEND" | "RECIBE" | "VIEW";
 
 export type ChatParticipant = {
     userId: number;
@@ -60,6 +61,8 @@ export type Message = {
     updatedAt: string;
     content: string;
     type: MessageType;
+    status: StatusType;
+    multimediaUrl: string | null
     chatId: number;
     senderId: number
 }
@@ -69,4 +72,11 @@ export type MessageResponse = {
     meta: {
         limit: number
     }
+}
+
+export interface TargetUser {
+    id: number
+    fullname: string,
+    phone: string,
+    profilePicture: string | null;
 }

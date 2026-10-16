@@ -1,0 +1,147 @@
+.contacts-page {
+    --contacts-bg: #0b0c10;
+    --contacts-panel: #111923;
+    --contacts-cyan: #66fcf1;
+    --contacts-orange: #ffad42;
+    --contacts-text: #c5c6c7;
+    --contacts-muted: #7f929f;
+
+    position: relative;
+    min-height: 100%;
+    padding: 32px;
+    overflow: hidden;
+
+    color: var(--contacts-text);
+    background:
+        radial-gradient(ellipse at 85% 5%,
+            rgb(102 252 241 / 5%),
+            transparent 42%),
+        var(--contacts-bg);
+}
+
+/* Encabezado */
+
+.contacts-page__header {
+    position: relative;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgb(102 252 241 / 20%);
+}
+
+.contacts-page__eyebrow {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--contacts-cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.contacts-page__title {
+    margin: 0;
+    color: #f0f2f3;
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.contacts-page__subtitle {
+    margin: 8px 0 0;
+    color: var(--contacts-muted);
+    font-size: 14px;
+}
+
+/* Buscador */
+
+.contacts-page__search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    margin-bottom: 32px;
+    padding: 0 14px;
+
+    background: var(--contacts-panel);
+    border: 1px solid rgb(102 252 241 / 28%);
+    border-radius: 6px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contacts-page__search:focus-within {
+    border-color: var(--contacts-cyan);
+    box-shadow: 0 0 12px rgb(102 252 241 / 10%);
+}
+
+.contacts-page__search-icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--contacts-cyan);
+}
+
+.contacts-page__search-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.contacts-page__search-input {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 0;
+
+    color: #f0f2f3;
+    font: inherit;
+    font-size: 14px;
+
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.contacts-page__search-input::placeholder {
+    color: #71838e;
+}
+
+.contacts-page__search-input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+.contacts-page__search-tag {
+    flex-shrink: 0;
+    color: var(--contacts-orange);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Lista */
+
+.contacts-page__content {
+    position: relative;
+}
+
+.contacts-page__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.contacts-page__section-title {
+    margin: 0;
+    color: var(--contacts-cyan);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.contacts-page__section-label {
+    color: #566875;
+    font-size: 10px;
+    letter-spacing: 1px;
+}

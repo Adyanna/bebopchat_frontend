@@ -3,6 +3,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import { Layout } from '@core/components/layout/layout';
 import type { Menu_Options } from '@core/types/core-types';
 import { useState, useEffect } from 'react';
+import { socket, connectSocket } from '@core/socket/socket';
+
 
 const PublicMenuOptions: Menu_Options[] = [
   { label: "Inicio", path: "/home" },
@@ -43,6 +45,48 @@ function App() {
       }
     }
   }, [isautenticate, location.pathname, navigate]);
+
+
+  // Socket.IO
+  useEffect(() => {
+    connectSocket();
+
+    const handleConnect = () => {
+      console.log('Socket conectado:', socket.id);
+    };
+
+    const handleConnectError = (error: Error) => {
+      console.error('Error de conexión Socket.IO:', error.message);
+    };
+
+    const handleReceiveMessage = (message: unknown) => {
+      console.log('Mensaje recibido por Socket.IO:', message);
+    };
+
+    socket.on('connect', handleConnect);
+    socket.on('connect_error', handleConnectError);
+    socket.on('receive_message', handleReceiveMessage);
+
+    socket.on('socket_error', (data: { message: string }) => {
+      console.error('Error de Socket.IO:', data.message);
+    });
+
+    socket.on('joined_conversation', (data: {
+      chatId: number;
+      message: string;
+    }) => {
+      console.log('✅ Entrada exitosa:', data.message);
+      console.log('Chat ID:', data.chatId);
+    });
+
+    return () => {
+      socket.off('connect', handleConnect);
+      socket.off('connect_error', handleConnectError);
+      socket.off('receive_message', handleReceiveMessage);
+      socket.off('socket_error');
+      socket.disconnect();
+    };
+  }, []);
 
   const menuOptions = isautenticate ? PrivateMenuOptions : PublicMenuOptions;
 
