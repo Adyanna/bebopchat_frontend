@@ -4,7 +4,7 @@ import type { Instance, SignalData } from 'simple-peer';
 import { socket } from '@core/socket/socket';
 import { emitAcceptCall, emitCallRequest, emitCallSignal, emitEndCall, emitRejectCall, } from '../services/callService';
 
-type CallStatus = | 'idle' | 'calling' | 'incoming' | 'connected';
+export type CallStatus = | 'idle' | 'calling' | 'incoming' | 'connected';
 
 export interface IncomingCall {
     chatId: number;
@@ -71,17 +71,19 @@ export const useAudioCall = () => {
         peerRef.current = peer;
 
         peer.on('signal', ((signal) => {
+            console.log('WEBRTC: señal generada', signal.type);
             emitCallSignal(chatId, targetUserId, signal as SignalData);
         }));
 
-        peer.on('stream', (stream) => {
-            setRemoteStream(stream);
-            //por que no actualizamos el estado directamente?
-            updateStatus('connected')
+        peer.on('connect', () => {
+            console.log('WEBRTC: conexión establecida');
+            updateStatus('connected');
         });
 
-        peer.on('connect', () => {
-            updateStatus('connected');
+        peer.on('stream', (stream) => {
+            console.log('WEBRTC: audio remoto recibido', stream);
+            setRemoteStream(stream);
+            updateStatus('connected')
         });
 
         peer.on('error', () => {
@@ -153,7 +155,6 @@ export const useAudioCall = () => {
             setIncomingCall(null);
 
             const peer = createPeer(false, chatId, callerId, stream);
-            //que rallos?
             for (const signal of pendingSignalsRef.current) {
                 peer.signal(signal);
             }
@@ -192,15 +193,25 @@ export const useAudioCall = () => {
             chatId: number;
             userId: number;
         }) => {
+            console.log('FRONTEND: call_accepted recibido', data);
+            console.log('DEBUG llamada', {
+                call: activeCallRef.current,
+                received: data,
+                status: statusRef.current,
+            });
             const call = activeCallRef.current;
             if (!call || call.chatId !== data.chatId || call.targetUserId !== data.userId || statusRef.current !== 'calling') {
                 return;
             }
 
             try {
+                console.log('1. Antes de getMicrophone');
                 const stream = await getMicrophone();
+                console.log('2. Micrófono obtenido:', stream.getAudioTracks().length);
                 createPeer(true, call.chatId, call.targetUserId, stream);
-            } catch {
+                console.log('3. createPeer ejecutado');
+            } catch (error) {
+                console.error('Error al preparar la llamada:', error);
                 setError('No se pudo acceder al micrófono.');
                 endCall();
             }

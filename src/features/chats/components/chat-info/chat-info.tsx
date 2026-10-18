@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GroupInfoPanel } from "../group-info-panel/group-info-panel";
 import { AddParticipantsButton } from "../add-participants-button/add-participants-button";
 import { AddParticipantsModal } from "../add-participants-modal/add-participants-modal";
+import { useCall } from "@features/chats/contexts/call-context";
 import "./chat-info.css"
 
 
@@ -21,6 +22,7 @@ type Props = {
 
 export const ChatInfo = ({ chatId, type, participants, name, description, onSave, onRemoveParticipant, onAddParticipants }: Props) => {
     const { userData } = useUser();
+    const { startCall } = useCall();
     // console.log("USER CONTEXT:", userData);
     //REVISAR POR QUE CONSUME 8 VECES EL SERVICIO
     const currentUserId = userData?.id;
@@ -58,22 +60,23 @@ export const ChatInfo = ({ chatId, type, participants, name, description, onSave
                         ● En linea
                     </div>
                 </div>
-
-                <button type="button" className="chat-call-button" aria-label="Llamar">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 4h3l2 5-2 2a13 13 0 0 0 5 5l2-2 5 2v3c0 1.1-.9 2-2 2C10.82 21 3 13.18 3 5c0-1.1.9-2 2-2Z"
-                        />
-                    </svg>
-                </button>
+                {type === 'INDIVIDUAL' && otherParticipant && (
+                    <button type="button" onClick={() => { void startCall(chatId, otherParticipant.userId) }} className="chat-call-button" aria-label="Iniciar llamada de audio" title="audio">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M5 4h3l2 5-2 2a13 13 0 0 0 5 5l2-2 5 2v3c0 1.1-.9 2-2 2C10.82 21 3 13.18 3 5c0-1.1.9-2 2-2Z"
+                            />
+                        </svg>
+                    </button>
+                )}
             </div>
 
             {type === "GROUP" && (

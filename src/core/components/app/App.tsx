@@ -4,6 +4,7 @@ import { Layout } from '@core/components/layout/layout';
 import type { Menu_Options } from '@core/types/core-types';
 import { useState, useEffect } from 'react';
 import { socket, connectSocket } from '@core/socket/socket';
+import { CallProvider } from '@features/chats/contexts/call-context';
 
 
 const PublicMenuOptions: Menu_Options[] = [
@@ -91,16 +92,18 @@ function App() {
   const menuOptions = isautenticate ? PrivateMenuOptions : PublicMenuOptions;
 
   return (
-    <Layout
-      title="BEBOPCHAT"
-      subTittle="Welcome to my App"
-      menuOptions={menuOptions}
-      srcl={srclogo}
-      isAuth={isautenticate}
-      setIsAuth={setIsAutenticate}
-    >
-      <Outlet />
-    </Layout>
+    <CallProvider>
+      <Layout
+        title="BEBOPCHAT"
+        subTittle="Welcome to my App"
+        menuOptions={menuOptions}
+        srcl={srclogo}
+        isAuth={isautenticate}
+        setIsAuth={setIsAutenticate}
+      >
+        <Outlet />
+      </Layout>
+    </CallProvider>
   );
 }
 
