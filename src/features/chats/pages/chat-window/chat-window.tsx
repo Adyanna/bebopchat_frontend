@@ -19,7 +19,7 @@ function ChatWindow() {
     const { id } = useParams();
     const chatId = Number(id);
     // const { chat, notification, loading, } = useChat(chatId);
-    const { chat, notification, loading, updateChatInfo, removeParticipant } = useChat(chatId);
+    const { chat, notification, loading, updateChatInfo, removeParticipant, addParticipants } = useChat(chatId);
 
     // const [error, setError] = useState<string | null>(null);
     const { refreshChatList } = useOutletContext<ChatPageContext>();
@@ -126,6 +126,7 @@ function ChatWindow() {
                         description={chat.description}
                         onSave={updateChatInfo}
                         onRemoveParticipant={removeParticipant}
+                        onAddParticipants={addParticipants}
                     />
                 </div>
             }

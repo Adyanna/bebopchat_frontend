@@ -131,18 +131,6 @@ export function useMessages(chatId: number, refreshChatList: () => void) {
         }
     };
 
-    //  const sendMessage = async (content: string) => {
-    //         try {
-    //             const response = await createMessage(chatId, content);
-    //             refreshChatList();
-    //             addMessage(response);
-    //             setError(null);
-    //         } catch (error) {
-    //             const errorMessage = error instanceof Error ? error.message : "Error al mandar el mensaje"
-    //             setError(errorMessage)
-    //         }
-    //     };
-
     return {
         messages,
         fetchMore,

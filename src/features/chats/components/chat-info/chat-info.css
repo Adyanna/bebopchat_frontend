@@ -148,3 +148,47 @@
     border-radius: 8px;
     margin: 0 12px 12px;
 }
+
+.group-actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 12px;
+    background: #0b0c10;
+}
+
+.add-participants-button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+    margin: 0;
+
+    border: 1px solid rgba(102, 252, 241, 0.4);
+    border-radius: 50%;
+
+    background: #1f2833;
+    color: #66fcf1;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-participants-button:hover {
+    background: #263746;
+    box-shadow: 0 0 12px rgba(102, 252, 241, 0.2);
+}
+
+.add-participants-button:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.add-participants-button svg {
+    width: 24px;
+    height: 24px;
+}

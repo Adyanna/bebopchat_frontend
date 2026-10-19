@@ -1,0 +1,24 @@
+.add-participants-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 8px auto;
+    border: 1px solid var(--color-accent-cyan, #66fcf1);
+    border-radius: 50%;
+    background: var(--color-bg-card, #1f2833);
+    color: var(--color-accent-cyan, #66fcf1);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.add-participants-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.add-participants-button:hover {
+    background: #263746;
+    transform: scale(1.05);
+}
