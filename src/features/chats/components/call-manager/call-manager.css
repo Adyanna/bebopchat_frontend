@@ -1,0 +1,204 @@
+.call-manager {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    width: min(380px, calc(100vw - 2rem));
+    overflow: hidden;
+    color: #c5c6c7;
+    background: #0b0c10;
+    border: 1px solid rgb(102 252 241 / 40%);
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgb(102 252 241 / 12%);
+}
+
+.call-manager__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #1f2833;
+    border-bottom: 1px solid rgb(102 252 241 / 20%);
+}
+
+.call-manager__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #66fcf1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.call-manager__brand-icon {
+    font-size: 1rem;
+}
+
+.call-manager__badge {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.call-manager__badge--incoming {
+    color: #66fcf1;
+    background: rgb(102 252 241 / 10%);
+    border-color: rgb(102 252 241 / 40%);
+}
+
+.call-manager__badge--connected {
+    color: #6ee7b7;
+    background: rgb(52 211 153 / 10%);
+    border-color: rgb(52 211 153 / 40%);
+}
+
+.call-manager__badge--calling {
+    color: #fcd34d;
+    background: rgb(251 191 36 / 10%);
+    border-color: rgb(251 191 36 / 40%);
+}
+
+.call-manager__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.call-manager__info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.call-manager__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    color: #66fcf1;
+    background: rgb(102 252 241 / 10%);
+    border: 1px solid rgb(102 252 241 / 50%);
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.call-manager__icon--connected {
+    color: #6ee7b7;
+    background: rgb(52 211 153 / 10%);
+    border-color: rgb(52 211 153 / 50%);
+}
+
+.call-manager__details {
+    min-width: 0;
+}
+
+.call-manager__title {
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+}
+
+.call-manager__subtitle {
+    margin: 0.25rem 0 0;
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.call-manager__progress {
+    height: 4px;
+    overflow: hidden;
+    background: #1e293b;
+    border-radius: 999px;
+}
+
+.call-manager__progress-bar {
+    width: 33.333%;
+    height: 100%;
+    background: #66fcf1;
+    border-radius: inherit;
+    animation: call-manager-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes call-manager-pulse {
+    from {
+        opacity: 0.4;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(200%);
+    }
+}
+
+.call-manager__error {
+    margin: 0;
+    padding: 0.75rem;
+    color: #fca5a5;
+    background: rgb(248 113 113 / 10%);
+    border: 1px solid rgb(248 113 113 / 30%);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+}
+
+.call-manager__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.call-manager__button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.call-manager__button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.call-manager__button--accept {
+    color: #6ee7b7;
+    background: rgb(16 185 129 / 15%);
+    border-color: rgb(52 211 153 / 40%);
+}
+
+.call-manager__button--accept:hover {
+    background: rgb(16 185 129 / 30%);
+    box-shadow: 0 0 12px rgb(52 211 153 / 12%);
+}
+
+.call-manager__button--reject,
+.call-manager__button--hangup {
+    color: #fda4af;
+    background: rgb(239 68 68 / 15%);
+    border-color: rgb(248 113 113 / 40%);
+}
+
+.call-manager__button--reject:hover,
+.call-manager__button--hangup:hover {
+    background: rgb(239 68 68 / 30%);
+}
+
+.call-manager__footer {
+    padding-top: 0.75rem;
+    color: #64748b;
+    border-top: 1px solid #1e293b;
+    font-size: 0.5625rem;
+    letter-spacing: 0.15em;
+}
