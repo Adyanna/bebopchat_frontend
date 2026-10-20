@@ -1,6 +1,8 @@
 import style from "./chat-list-body.module.css";
 import type { Chat } from "../../entities/chat.entity";
 import defaultAvatar from "@assets/default-bounty-hunter.svg";
+import { useUser } from "@features/users/hooks/useUser";
+import { API_URL } from "@features/chats/services/chat-list.service";
 
 interface ChatListBodyProps {
   chats: Chat[];
@@ -23,10 +25,16 @@ export const ChatListBody = ({
     return <div className={style.statusMessage}>NO HAY CHATS DISPONIBLES</div>;
   }
 
+  const { userData } = useUser();
+  const currentUserId = userData?.id;
+
   return (
     <div className={style.bodyContainer}>
       {chats.map((chat) => {
+
         const isActive = activeChatId === chat.id;
+        const participantPhoto = chat.participants.find(participant => participant.userId !== currentUserId)?.profilePicture;
+        const chatPhoto = chat.type === 'INDIVIDUAL' && participantPhoto ? `${API_URL}${participantPhoto}` : defaultAvatar;
 
         return (
           <div
@@ -37,7 +45,7 @@ export const ChatListBody = ({
             {/* Imagen del chat o imagen por defecto chat.image ||*/}
             <div className={style.avatarContainer}>
               <img
-                src={defaultAvatar}
+                src={chatPhoto}
                 alt={chat.name || 'foto del chat'}
                 className={style.avatarImage}
               />

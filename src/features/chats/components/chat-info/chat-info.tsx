@@ -4,7 +4,9 @@ import { useState } from "react";
 import { GroupInfoPanel } from "../group-info-panel/group-info-panel";
 import { AddParticipantsButton } from "../add-participants-button/add-participants-button";
 import { AddParticipantsModal } from "../add-participants-modal/add-participants-modal";
+import defaultAvatar from "@assets/default-bounty-hunter.svg";
 import { useCall } from "@features/chats/contexts/call-context";
+import { API_URL } from "@features/chats/services/chat-list.service";
 import "./chat-info.css"
 
 
@@ -23,10 +25,9 @@ type Props = {
 export const ChatInfo = ({ chatId, type, participants, name, description, onSave, onRemoveParticipant, onAddParticipants }: Props) => {
     const { userData } = useUser();
     const { startCall } = useCall();
-    // console.log("USER CONTEXT:", userData);
     //REVISAR POR QUE CONSUME 8 VECES EL SERVICIO
     const currentUserId = userData?.id;
-    const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
+
 
     const [isGroupInfoOpen, setIsGroupInfoOpen] = useState(false);
     const [isAddParticipantsOpen, setIsAddParticipantsOpen] = useState(false);
@@ -34,6 +35,10 @@ export const ChatInfo = ({ chatId, type, participants, name, description, onSave
     const otherParticipant = participants.find(
         participant => participant.userId !== currentUserId
     );
+
+    const participantPhoto = participants.find(participant => participant.userId !== currentUserId)?.profilePicture;
+    const chatPhoto = type === 'INDIVIDUAL' && participantPhoto ? `${API_URL}${participantPhoto}` : defaultAvatar;
+
 
     const isAdmin = participants.some((participant) => participant.userId === currentUserId && participant.role === "ADMIN");
     const displayName = type === "GROUP" ? name ?? "Grupo" : otherParticipant?.fullname ?? "Usuario";
@@ -44,7 +49,7 @@ export const ChatInfo = ({ chatId, type, participants, name, description, onSave
                 <div className="avatarWrapper">
                     <div className="avatarFrame">
                         <img
-                            src={defaultAvatar}
+                            src={chatPhoto}
                             alt={`Foto de ${displayName}`}
                             className="avatarImage"
                         />

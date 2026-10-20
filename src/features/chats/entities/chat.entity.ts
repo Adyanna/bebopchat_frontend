@@ -1,8 +1,8 @@
-export interface Participant {
-    userId: number;
-    fullname: string;
-    role: string;
-}
+// export interface Participant {
+//     userId: number;
+//     fullname: string;
+//     role: string;
+// }
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
@@ -24,22 +24,23 @@ export type ChatParticipant = {
     userId: number;
     fullname: string;
     role: string;
+    profilePicture: string | null
 }
 
 
 export interface LastMessage {
     id: number;
-    content: string;
+    content?: string;
     multimediaUrl: string | null;
     type: MessageType;
     senderId: number;
     chatId: number;
-    createdAt: Date;
+    createdAt: string;
 }
 
 export type Chat = {
     id: number,
-    createdAt: Date;
+    createAt: string;
     name: string | null;
     description: string | null;
     type: ChatType;
