@@ -3,6 +3,7 @@ import Peer from 'simple-peer';
 import type { Instance, SignalData } from 'simple-peer';
 import { socket } from '@core/socket/socket';
 import { emitAcceptCall, emitCallRequest, emitCallSignal, emitEndCall, emitRejectCall, } from '../services/callService';
+import iceServers from "@core/config/ice-servers";
 
 export type CallStatus = | 'idle' | 'calling' | 'incoming' | 'connected';
 
@@ -66,7 +67,7 @@ export const useAudioCall = () => {
         peerRef.current?.destroy();
         pendingSignalsRef.current = [];
 
-        const peer = new Peer({ initiator, stream, trickle: false });
+        const peer = new Peer({ initiator, stream, trickle: false, config: { iceServers } });
 
         peerRef.current = peer;
 
