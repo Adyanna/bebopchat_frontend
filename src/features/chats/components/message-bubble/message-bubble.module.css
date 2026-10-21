@@ -1,0 +1,160 @@
+@reference "tailwindcss";
+
+.messageOptionsButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: rgb(197 198 199 / 60%);
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.messageOptionsButton:hover {
+    background-color: rgb(0 0 0 / 20%);
+    color: #66fcf1;
+}
+
+.messageOptionsButton svg {
+    width: 14px;
+    height: 14px;
+}
+
+.messageOptionsMenu {
+    position: absolute;
+    top: 32px;
+    right: 8px;
+    z-index: 10;
+
+    min-width: 112px;
+    padding: 4px;
+
+    border: 1px solid rgb(102 252 241 / 30%);
+    border-radius: 6px;
+    background-color: #1f2833;
+
+    box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
+}
+
+.messageButtons {
+    width: 100%;
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+
+    color: #fca5a5;
+    font-size: 12px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.messageButtons:hover {
+    background-color: rgb(248 113 113 / 10%);
+    color: #fecaca;
+}
+
+/* ===== EDIT MESSAGE ===== */
+
+.messageEditContainer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.messageEditInput {
+    min-width: 180px;
+    padding: 7px 10px;
+
+    border: 1px solid rgb(102 252 241 / 40%);
+    border-radius: 6px;
+    outline: none;
+
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    font-size: 14px;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.messageEditInput:focus {
+    border-color: #66fcf1;
+    box-shadow: 0 0 6px rgb(102 252 241 / 20%);
+}
+
+.messageSaveButton {
+    padding: 7px 10px;
+
+    border: 1px solid rgb(102 252 241 / 40%);
+    border-radius: 6px;
+
+    background-color: rgb(102 252 241 / 10%);
+    color: #66fcf1;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.messageSaveButton:hover {
+    border-color: #66fcf1;
+    background-color: rgb(102 252 241 / 20%);
+}
+
+.messageMediaDivider {
+    width: 100%;
+    height: 1px;
+    flex-shrink: 0;
+    margin: 4px 0;
+    background: currentColor;
+    opacity: 0.2;
+}
+
+.messageAudio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 4px 0;
+}
+
+.messageAudio audio {
+    display: block;
+    width: 280px;
+    max-width: 100%;
+    height: 40px;
+}
+
+.currentUser {
+    @apply flex w-fit max-w-[65%] flex-col self-start;
+    @apply rounded-2xl rounded-br-md bg-[#A8C686];
+    @apply !px-6 py-3 text-left text-sm text-[#263238] shadow-sm;
+}
+
+.otherUser {
+    @apply flex w-fit max-w-[65%] flex-col self-start;
+    @apply rounded-2xl rounded-bl-md bg-[#1F2833];
+    @apply !px-6 py-3 text-left text-sm text-[#C5C6C7] shadow-sm;
+}

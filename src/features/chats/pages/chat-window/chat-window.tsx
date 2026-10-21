@@ -10,6 +10,8 @@ import { updateMessageStatus } from "@features/chats/services/chat.service";
 import type { StatusType } from "@features/chats/entities/chat.entity";
 import { useOutletContext } from "react-router";
 
+const messageSound = new Audio("/sounds/den_den_mushi.mp3");
+const notiSound = new Audio("/sounds/notification.mp3");
 
 type ChatPageContext = {
     refreshChatList: () => void;
@@ -33,11 +35,7 @@ function ChatWindow() {
         const handleReceiveMessage = async (
             message: (typeof messages)[number]
         ) => {
-            console.log("DATOS DEL MENSAJE, AQUI ACTUALIZA EL ESTADO", message);
             //  Insertar estado RECIBE, ya que el usuario se encuentra conectado
-            console.log("CHAT ID MENSJAE: ", message.chatId, " - ACTUAL ACTIVO: ", chatId)
-            //controlar si es individual o grupal
-            // aqui pasa algo que actualiza a visto aun que no este en el chat conectado en grupal
             if (Number(message.chatId) !== chatId) {
 
                 //VERIFICAR SI ES INDIVIDUAL, Y RECIEN ACTUALIZAR
@@ -53,15 +51,25 @@ function ChatWindow() {
                         error
                     );
                 }
+                messageSound.play().then(() => {
+                    setTimeout(() => {
+                        messageSound.pause();
+                        messageSound.currentTime = 0;
+                    }, 2000);
+                }).catch((error) => {
+                    console.error("Error al reproducir el sonido:", error);
+                });
+
                 return;
             }
 
-            console.log("Mensaje recibido en ChatWindow:", message);
             addMessage(message);
+            notiSound.play().catch((error) => {
+                console.error("Error al reproducir el sonido:", error);
+            });
 
             try {
                 // Si estamos dentro de este chat, el mensaje está visto.
-                console.log("ACTUALIZAR EL ESTADO", message);
                 await updateMessageStatus(
                     chatId,
                     message.id,

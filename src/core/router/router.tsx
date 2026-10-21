@@ -2,6 +2,8 @@ import ChatPage from '@features/chats/pages/chat-page/chat-page';
 import ChatEmpty from '@features/chats/pages/chat-empty/chat-empty';
 import ChatWindow from '@features/chats/pages/chat-window/chat-window';
 import ContactsPage from '@features/contacts/pages/contacts-page';
+import StatusPage from '@features/status/pages/status-page';
+import UnderConstructionPage from '@core/components/under-construction/under-construction-page';
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import { redirect } from 'react-router';
@@ -16,6 +18,7 @@ const ServicesPage = React.lazy(() => import('@features/home/pages/services-page
 const AboutPage = React.lazy(() => import('@features/home/pages/about-page/about-page'));
 const ProfilePage = React.lazy(() => import('@features/profile/pages/profile-page'));
 
+//const App = React.lazy(() => import('@core/components/app/App'));
 const SignupPage = React.lazy(
   () => import('@features/auth/pages/signup/signup-page')
 );
@@ -71,11 +74,28 @@ export const Router = createBrowserRouter([
         element: <ContactsPage />,
         loader: ProtectedRoute,
       },
-      // {
-      //   path: 'products/new',
-      //   loader: ProtectedRoute,
-      //   element: <ProductNew />,
-      // },
+      {
+        path: 'status',
+        element: <StatusPage />,
+      },
+      {
+        path: 'games',
+        element: (
+          <UnderConstructionPage
+            title="Juegos en construcción"
+            description="Estamos preparando juegos para que puedas divertirte y compartir nuevos momentos con tus contactos."
+          />
+        ),
+      },
+      {
+        path: 'calls',
+        element: (
+          <UnderConstructionPage
+            title="Las llamadas llegarán pronto"
+            description="Estamos trabajando en las llamadas para que puedas comunicarte con tus contactos directamente desde BebopChat."
+          />
+        ),
+      },
     ],
   },
   {
@@ -86,8 +106,6 @@ export const Router = createBrowserRouter([
     path: '/login',
     element: <SigninPage />,
   },
-
-
   {
     path: '/logout',
     element: <HomePage />,

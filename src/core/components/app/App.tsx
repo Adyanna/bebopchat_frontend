@@ -7,6 +7,7 @@ import { socket, connectSocket } from '@core/socket/socket';
 import { CallProvider } from '@features/chats/contexts/call-context';
 import srclogo from "@assets/logo_2.jpg"
 
+
 const PublicMenuOptions: Menu_Options[] = [
   { label: "Inicio", path: "/home" },
   { label: "Servicios", path: "/services" },

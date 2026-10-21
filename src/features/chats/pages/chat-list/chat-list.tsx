@@ -21,15 +21,6 @@ export const ChatList = ({ refreshChats }: Props) => {
     const navigate = useNavigate();
     const { id: activeChatId } = useParams<{ id: string }>();
 
-    // const fetchChats = async () => {
-    //     try {
-    //         const response = await chatService.getMyChats();
-    //         setChats(response.data || []);
-    //     } catch (error) {
-    //         console.error('Error al cargar la lista de chats:', error);
-    //     }
-    // };
-
     const fetchChats = useCallback(async () => {
         try {
             setLoading(true);
@@ -68,22 +59,7 @@ export const ChatList = ({ refreshChats }: Props) => {
             socket.off('receive_message', handleReceiveMessage);
         };
     }, [activeChatId]);
-    // useEffect(() => {
-    //     const fetchChats = async () => {
-    //         try {
-    //             setLoading(true);
-    //             const response = await chatService.getMyChats();
-    //             // Extraemos la propiedad 'data' del objeto recibido ({ data: Chat[] })
-    //             setChats(response.data || []);
-    //         } catch (error) {
-    //             console.error('Error al cargar la lista de chats:', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
 
-    //     fetchChats();
-    // }, []);
 
     useEffect(() => {
         fetchChats();

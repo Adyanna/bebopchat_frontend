@@ -1,0 +1,14 @@
+.contactsStatuses {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.message {
+    color: var(--color-text-primary);
+}
+
+.error {
+    color: #ff6b6b;
+}
