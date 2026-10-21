@@ -28,7 +28,6 @@ export const contactService = {
             const errorData = await response.json();
             throw new Error(errorData.error ?? 'Error al agregar contacto');
         }
-        // console.log(response.json())
         return await response.json();
     },
 

@@ -72,17 +72,14 @@ export const useAudioCall = () => {
         peerRef.current = peer;
 
         peer.on('signal', ((signal) => {
-            console.log('WEBRTC: señal generada', signal.type);
             emitCallSignal(chatId, targetUserId, signal as SignalData);
         }));
 
         peer.on('connect', () => {
-            console.log('WEBRTC: conexión establecida');
             updateStatus('connected');
         });
 
         peer.on('stream', (stream) => {
-            console.log('WEBRTC: audio remoto recibido', stream);
             setRemoteStream(stream);
             updateStatus('connected')
         });
@@ -194,7 +191,6 @@ export const useAudioCall = () => {
             chatId: number;
             userId: number;
         }) => {
-            console.log('FRONTEND: call_accepted recibido', data);
             const call = activeCallRef.current;
             if (!call || call.chatId !== data.chatId || call.targetUserId !== data.userId || statusRef.current !== 'calling') {
                 return;
@@ -202,9 +198,7 @@ export const useAudioCall = () => {
 
             try {
                 const stream = await getMicrophone();
-                console.log('Micrófono obtenido:', stream.getAudioTracks().length);
                 createPeer(true, call.chatId, call.targetUserId, stream);
-                console.log('createPeer ejecutado');
             } catch (error) {
                 console.error('Error al preparar la llamada:', error);
                 setError('No se pudo acceder al micrófono.');

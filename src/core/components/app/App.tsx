@@ -53,15 +53,15 @@ function App() {
     connectSocket();
 
     const handleConnect = () => {
-      console.log('Socket conectado:', socket.id);
+
     };
 
     const handleConnectError = (error: Error) => {
       console.error('Error de conexión Socket.IO:', error.message);
     };
 
-    const handleReceiveMessage = (message: unknown) => {
-      console.log('Mensaje recibido por Socket.IO:', message);
+    const handleReceiveMessage = () => {
+
     };
 
     socket.on('connect', handleConnect);
@@ -76,8 +76,7 @@ function App() {
       chatId: number;
       message: string;
     }) => {
-      console.log('✅ Entrada exitosa:', data.message);
-      console.log('Chat ID:', data.chatId);
+
     });
 
     return () => {
