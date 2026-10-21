@@ -72,10 +72,7 @@ function App() {
       console.error('Error de Socket.IO:', data.message);
     });
 
-    socket.on('joined_conversation', (data: {
-      chatId: number;
-      message: string;
-    }) => {
+    socket.on('joined_conversation', () => {
 
     });
 
