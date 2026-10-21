@@ -21,7 +21,6 @@ export const chatService = {
     if (!response.ok) {
       throw new Error('Error al obtener la lista de chats');
     }
-    // console.log(response.json())
     return await response.json();
   },
 

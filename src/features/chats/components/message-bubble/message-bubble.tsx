@@ -43,7 +43,6 @@ export function MessageBuble({
 
     const clasStyle = senderId === currentId ? currentUser : otherUser;
     const isCurrentUser = senderId === currentId;
-    // console.log("currentID: ", isCurrentUser, senderId, currentId)
     const handleEdit = async () => {
         if (!editedContent.trim()) return;
 

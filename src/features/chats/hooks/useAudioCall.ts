@@ -195,22 +195,16 @@ export const useAudioCall = () => {
             userId: number;
         }) => {
             console.log('FRONTEND: call_accepted recibido', data);
-            console.log('DEBUG llamada', {
-                call: activeCallRef.current,
-                received: data,
-                status: statusRef.current,
-            });
             const call = activeCallRef.current;
             if (!call || call.chatId !== data.chatId || call.targetUserId !== data.userId || statusRef.current !== 'calling') {
                 return;
             }
 
             try {
-                console.log('1. Antes de getMicrophone');
                 const stream = await getMicrophone();
-                console.log('2. Micrófono obtenido:', stream.getAudioTracks().length);
+                console.log('Micrófono obtenido:', stream.getAudioTracks().length);
                 createPeer(true, call.chatId, call.targetUserId, stream);
-                console.log('3. createPeer ejecutado');
+                console.log('createPeer ejecutado');
             } catch (error) {
                 console.error('Error al preparar la llamada:', error);
                 setError('No se pudo acceder al micrófono.');
