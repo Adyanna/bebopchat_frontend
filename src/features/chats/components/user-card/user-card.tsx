@@ -1,16 +1,17 @@
 import type { TargetUser } from "@features/chats/entities/chat.entity";
 import { useState } from "react";
+import defaultAvatar from "@assets/default-bounty-hunter.svg"
 import "./user-card.css";
 import { contactService } from "@features/contacts/services/contact.service";
+import { API_URL } from "@features/chats/services/chat-list.service";
 
 type props = {
     user: TargetUser,
-    defaultAvatar: string,
     onCreate: (targetId: number) => void
 }
 
 
-export function UserCard({ user, defaultAvatar, onCreate }: props) {
+export function UserCard({ user, onCreate }: props) {
     const [isAdded, setIsAdded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [hasAddError, setHasAddError] = useState(false);
@@ -38,7 +39,7 @@ export function UserCard({ user, defaultAvatar, onCreate }: props) {
         <div className="search-user__card">
 
             <img
-                src={user.profilePicture || defaultAvatar}
+                src={user.profilePicture ? `${API_URL}${user.profilePicture}` : defaultAvatar}
                 alt={`${user.fullname} profile picture`}
                 className="search-user__avatar"
             />
