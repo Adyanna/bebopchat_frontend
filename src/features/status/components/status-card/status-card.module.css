@@ -1,0 +1,200 @@
+.statusCard {
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+    overflow: hidden;
+    background-color: var(--color-bg-card);
+    border: 1px solid rgb(102 252 241 / 20%);
+    border-radius: 0.75rem;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.statusCard:hover {
+    border-color: var(--color-accent-cyan);
+    transform: translateY(-2px);
+}
+
+.preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 14rem;
+    overflow: hidden;
+    background-color: var(--color-bg-primary);
+}
+
+.textContent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    color: var(--color-text-primary);
+}
+
+.textContent>* {
+    max-width: 100%;
+}
+
+.mediaContent {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+}
+
+.views {
+    color: var(--color-accent-yellow);
+    font-size: 0.8rem;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgb(0 0 0 / 80%);
+}
+
+.expandedModal {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(90vw, 45rem);
+    height: min(85vh, 45rem);
+    padding: 2rem;
+    overflow: hidden;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-accent-cyan);
+    border-radius: 0.75rem;
+}
+
+.expandedModal .mediaContent {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.expandedModal .textContent {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    z-index: 1;
+    padding: 0.25rem 0.5rem;
+    color: var(--color-text-primary);
+    font-size: 1.75rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.footerActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.views {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-accent-yellow);
+    font-size: 0.8rem;
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    color: #ff6b6b;
+    background: transparent;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.iconButton:hover {
+    background-color: rgb(255 107 107 / 15%);
+}
+
+.confirmOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgb(0 0 0 / 80%);
+}
+
+.confirmModal {
+    width: min(100%, 25rem);
+    padding: 1.5rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-accent-cyan);
+    border-radius: 0.75rem;
+}
+
+.confirmModal h2 {
+    margin-top: 0;
+    color: var(--color-accent-cyan);
+}
+
+.confirmActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.cancelButton,
+.deleteButton {
+    padding: 0.6rem 1rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.cancelButton {
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 1px solid var(--color-text-primary);
+}
+
+.deleteButton {
+    color: white;
+    background-color: #c0392b;
+    border: 1px solid #c0392b;
+}
+
+.cancelButton:disabled,
+.deleteButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.deleteError {
+    color: #ff6b6b;
+}

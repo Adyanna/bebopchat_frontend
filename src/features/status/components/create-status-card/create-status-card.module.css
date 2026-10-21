@@ -1,0 +1,223 @@
+.createCard {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 12rem;
+    width: 12rem;
+    height: 18.5rem;
+    padding: 0;
+    overflow: hidden;
+    color: var(--color-text-primary);
+    text-align: left;
+    cursor: pointer;
+    background-color: var(--color-bg-card);
+    border: 1px solid rgb(102 252 241 / 20%);
+    border-radius: 0.75rem;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.createCard:hover {
+    border-color: var(--color-accent-cyan);
+    transform: translateY(-2px);
+}
+
+.preview {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    background-color: var(--color-bg-primary);
+}
+
+.plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--color-bg-primary);
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1;
+    background-color: var(--color-accent-cyan);
+    border-radius: 50%;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem;
+}
+
+.title {
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.description {
+    color: var(--color-text-primary);
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Fondo del modal */
+.overlay {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto;
+    background: rgb(0 0 0 / 75%);
+}
+
+/* Modal de selección */
+.modal {
+    width: min(95vw, 58rem);
+    max-width: none;
+    max-height: 90vh;
+    overflow-y: auto;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /*gap: 1.25rem;
+    width: 100%;
+    max-width: 25rem; */
+    max-height: calc(100vh - 2rem);
+    padding: 1.5rem;
+    overflow-y: auto;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-accent-cyan);
+    border-radius: 0.75rem;
+    box-shadow: 0 12px 40px rgb(0 0 0 / 35%);
+}
+
+.modalCompact {
+    width: 100%;
+    max-width: 25rem;
+}
+
+.modalWide {
+    width: min(95vw, 58rem);
+    max-width: none;
+}
+
+.modalTitle {
+    margin: 0;
+    color: var(--color-accent-cyan);
+    font-size: 1.4rem;
+}
+
+.modalDescription {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Opciones */
+.options {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.optionButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 50%;
+    padding: 1rem;
+    color: var(--color-text-primary);
+    text-align: left;
+    cursor: pointer;
+    background-color: var(--color-bg-primary);
+    border: 1px solid rgb(102 252 241 / 25%);
+    border-radius: 0.6rem;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.optionButton:hover {
+    color: var(--color-text-primary) !important;
+    background-color: rgb(102 252 241 / 8%) !important;
+    border-color: var(--color-accent-cyan);
+}
+
+.optionButton span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.optionButton strong {
+    font-size: 0.95rem;
+}
+
+.optionButton small {
+    color: var(--color-text-primary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+.optionIcon {
+    display: flex;
+    flex: 0 0 2.75rem;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--color-accent-cyan);
+    font-size: 1.4rem;
+    border: 1px solid var(--color-accent-cyan);
+    border-radius: 50%;
+}
+
+/* Cancelar */
+.cancelButton {
+    align-self: flex-end;
+    padding: 0.65rem 1rem;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgb(197 198 199 / 35%);
+    border-radius: 0.45rem;
+}
+
+.cancelButton:hover {
+    color: var(--color-accent-cyan) !important;
+    background-color: transparent !important;
+    border-color: var(--color-accent-cyan);
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 1.25rem;
+    }
+}
+
+.optionsContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.options {
+    width: 100%;
+}

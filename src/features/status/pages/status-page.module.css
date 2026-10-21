@@ -1,0 +1,52 @@
+.statusPage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    color: var(--color-text-primary);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-bg-card);
+}
+
+.header h1 {
+    margin: 0 0 0.5rem;
+    color: var(--color-accent-cyan);
+}
+
+.header p {
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section h2 {
+    margin: 0;
+    color: var(--color-accent-cyan);
+}
+
+.description {
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 8rem;
+    padding: 1rem;
+    background-color: var(--color-bg-card);
+    border: 1px solid rgb(102 252 241 / 12%);
+    border-radius: 0.75rem;
+}
