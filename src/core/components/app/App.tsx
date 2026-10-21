@@ -5,7 +5,7 @@ import type { Menu_Options } from '@core/types/core-types';
 import { useState, useEffect } from 'react';
 import { socket, connectSocket } from '@core/socket/socket';
 import { CallProvider } from '@features/chats/contexts/call-context';
-
+import srclogo from "@assets/logo_2.jpg"
 
 const PublicMenuOptions: Menu_Options[] = [
   { label: "Inicio", path: "/home" },
@@ -22,7 +22,7 @@ const PrivateMenuOptions: Menu_Options[] = [
   { label: "Juegos", path: "/games" }
 ];
 
-const srclogo = "../src/assets/logo_2.jpg";
+
 
 function App() {
   const token = localStorage.getItem("token") || sessionStorage.getItem('token');
