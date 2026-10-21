@@ -1,4 +1,5 @@
 import type { Message } from "../entities/chat.entity";
+import { useUser } from "@features/users/hooks/useUser";
 import { useEffect, useState } from "react";
 // import { getMessages, updateMessage, deleteMessage } from "../services/chat.service";
 import { getMessages, updateMessage, deleteMessage, createMessage } from "../services/chat.service";
@@ -12,35 +13,51 @@ export function useMessages(chatId: number, refreshChatList: () => void) {
     const [isFetchingMore, setIsFetchingMore] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { userData } = useUser();
+    const currentId = userData?.id;
 
     useEffect(() => {
+        if (!chatId) return;
         const loadInitial = async () => {
             setMessages([])
             setHasMore(true);
-            const initial = await getMessages(chatId);
-            setMessages(initial.data);
-            for (const message of initial.data) {
-                if (message.status !== "VIEW") {
-                    try {
-                        await updateMessageStatus(
-                            chatId,
-                            message.id,
-                            "VIEW"
-                        );
-                    } catch (error) {
-                        console.error(
-                            "Error al actualizar el estado del mensaje:",
-                            error
-                        );
-                    }
+            try{
+                const initial = await getMessages(chatId);
+                setMessages(initial.data);
+                if (initial.data.length < 30) {
+                    setHasMore(false)
                 }
-            }
-            if (initial.data.length < 30) {
-                setHasMore(false)
+                // 1. Carga los mensajes primero y SOLO si existe currentId en este instante, intenta actualizar
+                if (currentId) {
+                    markMessagesAsViewed(initial.data, currentId);
+                }
+
+            } catch (error) {
+                console.error("Error al cargar mensajes iniciales:", error);
             }
         }
         loadInitial();
     }, [chatId]);
+
+    // 2. Si los mensajes cargaron mientras currentId era undefined, 
+    // este efecto se dispara en cuanto currentId obtiene su valor real
+    useEffect(() => {
+        if (currentId && messages.length > 0) {
+            markMessagesAsViewed(messages, currentId);
+        }
+    }, [currentId]);
+
+    // Función auxiliar reusable para mantener limpio el código
+    const markMessagesAsViewed = (messageList: any[], userId: string | number) => {
+        for (const message of messageList) {
+            // Valida que sea de la otra persona y que no esté visto
+            if (message.senderId !== userId && message.status !== "VIEW") {
+                updateMessageStatus(chatId, message.id, "VIEW").catch((error) =>
+                    console.error("Error al actualizar el estado del mensaje:", error)
+                );
+            }
+        }
+    };
 
     const fetchMore = async () => {
         if (isFetchingMore || !hasMore || messages.length === 0) return;
