@@ -1,8 +1,8 @@
-export interface Participant {
-    userId: number;
-    fullname: string;
-    role: string;
-}
+// export interface Participant {
+//     userId: number;
+//     fullname: string;
+//     role: string;
+// }
 
 // DTO para enviar en el POST /chats
 export interface CreateChatDTO {
@@ -24,36 +24,30 @@ export type ChatParticipant = {
     userId: number;
     fullname: string;
     role: string;
+    profilePicture: string | null
 }
 
 
 export interface LastMessage {
     id: number;
-    content: string;
+    content?: string;
     multimediaUrl: string | null;
     type: MessageType;
     senderId: number;
     chatId: number;
-    createdAt: Date;
+    createdAt: string;
 }
 
 export type Chat = {
     id: number,
-    createdAt: Date;
+    createAt: string;
     name: string | null;
     description: string | null;
     type: ChatType;
     participants: ChatParticipant[];
     lastMessage: LastMessage | null;
 }
-// export interface Chat {
-//   id: number;
-//   createAt: string;
-//   name: string;
-//   description: string;
-//   type: string;
-//   participants: Participant[];
-// }
+
 
 export type Message = {
     id: number;
@@ -62,9 +56,11 @@ export type Message = {
     content: string;
     type: MessageType;
     status: StatusType;
-    multimediaUrl: string | null
+    multimediaUrl: string | null;
     chatId: number;
-    senderId: number
+    senderId: number;
+    chatType?:ChatType;
+    user?: ParticipantData;
 }
 
 export type MessageResponse = {
@@ -79,4 +75,10 @@ export interface TargetUser {
     fullname: string,
     phone: string,
     profilePicture: string | null;
+}
+
+export interface ParticipantData {
+    id: number;
+    fullname: string;
+    photoUrl?: string|null;
 }

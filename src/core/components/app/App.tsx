@@ -5,6 +5,7 @@ import type { Menu_Options } from '@core/types/core-types';
 import { useState, useEffect } from 'react';
 import { socket, connectSocket } from '@core/socket/socket';
 import { CallProvider } from '@features/chats/contexts/call-context';
+import srclogo from "@assets/logo_2.jpg"
 
 
 const PublicMenuOptions: Menu_Options[] = [
@@ -22,7 +23,7 @@ const PrivateMenuOptions: Menu_Options[] = [
   { label: "Juegos", path: "/games" }
 ];
 
-const srclogo = "../src/assets/logo_2.jpg";
+
 
 function App() {
   const token = localStorage.getItem("token") || sessionStorage.getItem('token');
@@ -53,15 +54,15 @@ function App() {
     connectSocket();
 
     const handleConnect = () => {
-      console.log('Socket conectado:', socket.id);
+
     };
 
     const handleConnectError = (error: Error) => {
       console.error('Error de conexión Socket.IO:', error.message);
     };
 
-    const handleReceiveMessage = (message: unknown) => {
-      console.log('Mensaje recibido por Socket.IO:', message);
+    const handleReceiveMessage = () => {
+
     };
 
     socket.on('connect', handleConnect);
@@ -72,12 +73,8 @@ function App() {
       console.error('Error de Socket.IO:', data.message);
     });
 
-    socket.on('joined_conversation', (data: {
-      chatId: number;
-      message: string;
-    }) => {
-      console.log('✅ Entrada exitosa:', data.message);
-      console.log('Chat ID:', data.chatId);
+    socket.on('joined_conversation', () => {
+
     });
 
     return () => {

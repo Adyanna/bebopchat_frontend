@@ -1,6 +1,8 @@
 import type { ChatParticipant } from "@features/chats/entities/chat.entity";
 import { useContacs } from "@features/contacts/hooks/useContacts";
 import { useState } from "react";
+import defaultAvatar from "@assets/default-bounty-hunter.svg"
+import { API_URL } from "@features/chats/services/chat-list.service";
 import "./add-participants-modal.css";
 
 
@@ -21,7 +23,6 @@ export function AddParticipantsModal({ chatId, participants, onClose, onParticip
     const participantsIds = participants.map(participant => participant.userId);
     const availableContacts = contacts.filter((contact) => !participantsIds.includes(contact.userContactId));
 
-    const defaultAvatar = "/src/assets/default-bounty-hunter.svg";
 
     function toggleContact(userId: number) {
         setSelectedIds((prev) =>
@@ -86,7 +87,7 @@ export function AddParticipantsModal({ chatId, participants, onClose, onParticip
                                     className="add-participants-contact"
                                     key={contact.contactId}
                                 >
-                                    <img src={contact.profilePicture || defaultAvatar} alt="" />
+                                    <img src={contact.profilePicture ? `${API_URL}${contact.profilePicture}` : defaultAvatar} alt="" />
                                     <span>{contact.fullname}</span>
                                     <input
                                         type="checkbox"

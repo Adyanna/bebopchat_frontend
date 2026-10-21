@@ -1,5 +1,8 @@
 import { ButtonCreateChat } from "@features/chats/components/buttons-create-chat/button-create-chat";
 import { useState, useId } from "react";
+import { API_URL } from "@features/chats/services/chat-list.service";
+import defaultAvatar from "@assets/default-bounty-hunter.svg";
+
 import "./contact-item.css";
 
 type Props = {
@@ -20,13 +23,13 @@ export function ContactItem({
     const [showOptions, setShowOptions] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const deleteTitleId = useId();
-    const defaultAvatar = "/src/assets/default-bounty-hunter.svg";
 
+    const photoUrl = profilePicture ? `${API_URL}${profilePicture}` : defaultAvatar;
 
     return (
         <div className="contact-item">
             <img
-                src={profilePicture || defaultAvatar}
+                src={photoUrl}
                 alt={`${fullname} profile picture`}
                 className="contact-item__avatar"
             />

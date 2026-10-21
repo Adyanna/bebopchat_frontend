@@ -34,7 +34,6 @@ export function SearchUserInput({ onCreate, showUser, onNewSearch }: Props) {
     }
 
     const canSubmit = phone.trim().length > 0;
-    const defaultAvatar = "../src/assets/default-bounty-hunter.svg";
 
     return (
         <div className="search-user">
@@ -58,7 +57,7 @@ export function SearchUserInput({ onCreate, showUser, onNewSearch }: Props) {
                 </button>
             </form>
 
-            {user && showUser && (<UserCard user={user} defaultAvatar={defaultAvatar} onCreate={onCreate} />)}
+            {user && showUser && (<UserCard user={user} onCreate={onCreate} />)}
 
             {error && (
                 <p className="search-user__error" role="alert">

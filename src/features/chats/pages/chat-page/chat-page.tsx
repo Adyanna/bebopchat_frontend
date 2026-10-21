@@ -4,7 +4,6 @@ import { ChatList } from "../chat-list/chat-list"; // Ajusta la ruta a tu ChatLi
 import style from "./chat-page.module.css";
 
 function ChatPage() {
-    console.log('estoy en chatpage')
     const [refreshChats, setRefreshChats] = useState(0);
     return (
         <div className={style.chatPage}>

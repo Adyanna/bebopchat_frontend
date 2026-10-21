@@ -72,8 +72,6 @@ export async function getMe(token: string): Promise<userViewDTO> {
 
 export async function registerUser(user: userCreateDTO): Promise<userViewDTO> {
     try {
-        console.log("registerUser", user);
-        console.log("url", url);
         const data = await fetch(`${url}/signup`, {
             method: 'POST',
             headers: {
@@ -81,7 +79,6 @@ export async function registerUser(user: userCreateDTO): Promise<userViewDTO> {
             },
             body: JSON.stringify(user)
         });
-        console.log(data);
 
         if (!data.ok) {
             const error = await data.json();
