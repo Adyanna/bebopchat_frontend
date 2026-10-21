@@ -1,0 +1,202 @@
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 70vh;
+    padding: 3rem 1.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+}
+
+.illustration {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 190px;
+    height: 190px;
+    margin-bottom: 1.5rem;
+}
+
+.orbit {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border: 1px dashed var(--border-color, #45515f);
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 112px;
+    height: 112px;
+    border-radius: 32px;
+    background: linear-gradient(145deg, #287c80, #4258a5);
+    box-shadow: 0 16px 45px rgb(40 124 128 / 25%);
+    transform: rotate(-8deg);
+}
+
+.symbol {
+    color: white;
+    font-size: 4rem;
+    line-height: 1;
+    transform: rotate(8deg);
+}
+
+.sparkle {
+    position: absolute;
+    color: var(--accent-color, #58bfc0);
+    font-weight: 700;
+}
+
+.sparkleOne {
+    top: 15px;
+    right: 25px;
+    font-size: 2rem;
+}
+
+.sparkleTwo {
+    bottom: 20px;
+    left: 15px;
+    font-size: 1.6rem;
+}
+
+.sparkleThree {
+    top: 48px;
+    left: 12px;
+    font-size: 1.2rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid rgb(88 191 192 / 30%);
+    border-radius: 999px;
+    background: rgb(88 191 192 / 9%);
+    color: var(--accent-color, #58bfc0);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.badgeDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 1.8s ease-in-out infinite;
+}
+
+.title {
+    margin: 1.25rem 0 0.75rem;
+    color: var(--text-color, #f1f5f9);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+.description {
+    max-width: 440px;
+    margin: 0;
+    color: var(--text-secondary, #9ba8b7);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    color: var(--text-secondary, #9ba8b7);
+    font-size: 0.78rem;
+}
+
+.footerLine {
+    width: 24px;
+    height: 1px;
+    background: var(--border-color, #45515f);
+}
+
+.homeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 1.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    background: var(--accent-color, #287c80);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.homeButton:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+}
+
+.homeButton:focus-visible {
+    outline: 2px solid var(--accent-color, #58bfc0);
+    outline-offset: 4px;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    50% {
+        opacity: 0.35;
+        transform: scale(0.75);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .orbit,
+    .badgeDot {
+        animation: none;
+    }
+
+    .homeButton {
+        transition: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        min-height: 60vh;
+        padding: 2rem 1rem;
+    }
+
+    .illustration {
+        transform: scale(0.9);
+        margin-bottom: 0.75rem;
+    }
+
+    .description {
+        font-size: 0.92rem;
+    }
+}

@@ -46,14 +46,7 @@ export type Chat = {
     participants: ChatParticipant[];
     lastMessage: LastMessage | null;
 }
-// export interface Chat {
-//   id: number;
-//   createAt: string;
-//   name: string;
-//   description: string;
-//   type: string;
-//   participants: Participant[];
-// }
+
 
 export type Message = {
     id: number;
@@ -62,9 +55,11 @@ export type Message = {
     content: string;
     type: MessageType;
     status: StatusType;
-    multimediaUrl: string | null
+    multimediaUrl: string | null;
     chatId: number;
-    senderId: number
+    senderId: number;
+    chatType?:ChatType;
+    user?: ParticipantData;
 }
 
 export type MessageResponse = {
@@ -79,4 +74,10 @@ export interface TargetUser {
     fullname: string,
     phone: string,
     profilePicture: string | null;
+}
+
+export interface ParticipantData {
+    id: number;
+    fullname: string;
+    photoUrl?: string|null;
 }

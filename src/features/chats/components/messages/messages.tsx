@@ -27,15 +27,6 @@ export const Messages = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const isInitialLoad = useRef(true);
 
-
-
-    // useEffect(() => {
-    //     const element = containerRef.current;
-    //     if (!element || messages.length === 0) return;
-
-    //     element.scrollTop = element.scrollHeight;
-    // }, [messages]);
-
     useEffect(() => {
         const element = containerRef.current;
         if (!element || messages.length === 0) return;
@@ -85,6 +76,8 @@ export const Messages = ({
                     multimediaUrl={message.multimediaUrl}
                     createAt={message.createAt}
                     updatedAt={message.updatedAt}
+                    chatType={message.chatType}
+                    user={message.user}
                     onDelete={removeMessage}
                     onEdit={editMessage}
                 />))}
